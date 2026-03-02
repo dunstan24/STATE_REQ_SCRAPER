@@ -1,0 +1,166 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║              🔗 PYTHON SCRAPER → n8n QUICK REFERENCE                ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────┐
+│  📖 DOCUMENTATION FILES                                              │
+├──────────────────────────────────────────────────────────────────────┤
+│  ⭐ N8N_QUICKSTART.md              → Start here! (3 steps)          │
+│  📚 docs/N8N_CONNECTION_GUIDE.md   → Full documentation             │
+│  📦 N8N_INTEGRATION_SUMMARY.md     → Package overview               │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│  🚀 EXECUTABLE FILES                                                 │
+├──────────────────────────────────────────────────────────────────────┤
+│  🎯 send_to_n8n.bat                → One-click run (easiest!)       │
+│  💡 examples_n8n_integration.py    → 6 code examples                │
+│  🔧 n8n_workflow_template.json     → Import into n8n                │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│  ⚡ QUICK COMMANDS                                                   │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  # One-click run (Windows)                                          │
+│  .\send_to_n8n.bat                                                  │
+│                                                                      │
+│  # Command line                                                     │
+│  python run_visa_scraper.py --n8n --webhook-url "YOUR_URL"         │
+│                                                                      │
+│  # With visible browser (debugging)                                 │
+│  python run_visa_scraper.py --no-headless --n8n --webhook-url "URL"│
+│                                                                      │
+│  # Run examples                                                     │
+│  python examples_n8n_integration.py                                 │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│  🔧 SETUP n8n                                                        │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  # Option 1: Cloud (easiest)                                        │
+│  → Go to https://n8n.io/cloud/                                      │
+│                                                                      │
+│  # Option 2: Docker                                                 │
+│  docker run -it --rm --name n8n -p 5678:5678 n8nio/n8n             │
+│                                                                      │
+│  # Option 3: npm                                                    │
+│  npm install -g n8n                                                 │
+│  n8n start                                                          │
+│                                                                      │
+│  → Access at: http://localhost:5678                                 │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│  📡 WEBHOOK URL FORMATS                                              │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  Cloud:   https://your-instance.app.n8n.cloud/webhook/visa-data    │
+│  Local:   http://localhost:5678/webhook/visa-data                  │
+│  Custom:  https://your-domain.com/webhook/visa-data                │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│  🔄 CONNECTION FLOW                                                  │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  ┌─────────────┐   HTTP POST    ┌──────────┐   Process   ┌────────┐│
+│  │   Python    │   (JSON)       │  n8n     │   Data      │ Your   ││
+│  │   Scraper   │ ─────────────→ │ Webhook  │ ──────────→ │ Action ││
+│  │             │                │          │             │        ││
+│  └─────────────┘                └──────────┘             └────────┘│
+│                                                                      │
+│  Actions: Google Sheets, Email, Database, Slack, etc.               │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│  📊 DATA FORMAT SENT                                                 │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  {                                                                   │
+│    "timestamp": "2026-01-26T12:47:18",                              │
+│    "records_count": 16,                                             │
+│    "data": [                                                        │
+│      {                                                              │
+│        "program_year": "2025-26",                                   │
+│        "visa_subclass": "190",                                      │
+│        "state_territory": "NSW",                                    │
+│        "allocations": 700                                           │
+│      }                                                              │
+│      // ... more records                                            │
+│    ]                                                                │
+│  }                                                                   │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│  ✅ TESTING CHECKLIST                                                │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  □ n8n is running (http://localhost:5678)                           │
+│  □ Import n8n_workflow_template.json                                │
+│  □ Activate workflow in n8n                                         │
+│  □ Copy webhook URL                                                 │
+│  □ Update webhook URL in send_to_n8n.bat                            │
+│  □ Click "Listen for Test Event" in n8n                             │
+│  □ Run: .\send_to_n8n.bat                                           │
+│  □ Verify data appears in n8n                                       │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│  🐛 TROUBLESHOOTING                                                  │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  Problem              → Solution                                    │
+│  ─────────────────────────────────────────────────────────────────  │
+│  Connection refused   → Check n8n is running                        │
+│  404 Not Found        → Activate workflow in n8n                    │
+│  No data appears      → Click "Listen for Test Event"               │
+│  Timeout              → Verify webhook URL is correct               │
+│  SSL error            → Use http:// for local testing               │
+│                                                                      │
+│  📁 Check logs in: logs/ directory                                  │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│  💡 USE CASES                                                        │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  1. Auto-update Google Sheets daily                                 │
+│  2. Email notifications when data changes                           │
+│  3. Store in database for historical tracking                       │
+│  4. Slack alerts for high allocations                               │
+│  5. Trigger other workflows based on data                           │
+│  6. Generate automated reports                                      │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│  📚 RESOURCES                                                        │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  n8n Docs:      https://docs.n8n.io/                                │
+│  Webhook Guide: https://docs.n8n.io/.../webhook/                    │
+│  Community:     https://community.n8n.io/                           │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║  🎯 READY TO START?                                                  ║
+║                                                                      ║
+║  1. Read: N8N_QUICKSTART.md                                         ║
+║  2. Set up n8n (cloud or local)                                     ║
+║  3. Import: n8n_workflow_template.json                              ║
+║  4. Run: .\send_to_n8n.bat                                          ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
