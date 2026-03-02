@@ -1,4 +1,4 @@
-# Occupation List Multi-State Scraper
+# Requirements Multi-State Scraper
 
 Extract **State and Territory Occupation List data** from 8 Australian states and territories, and normalize the results against the ANZSCO master list.
 
@@ -68,12 +68,6 @@ After running, check the `output/run_YYYYMMDD_HHMMSS/` folder:
 3. **`[STATE]_[list_type]_raw.csv`** - Raw extraction files per state
 4. **`scraper_YYYYMMDD_HHMMSS.log`** - Exection logs (in the `logs/` directory)
 
-### Excel Output Format
-
-| state_code | anzsco_unit_group_code | unit_group_name | anzsco_occupation_code | occupation_name | 190 | 491 |
-|------------|------------------------|-----------------|------------------------|-----------------|-----|-----|
-| NSW        | 2611                   | ICT Business... | 261111                 | ICT Business... | Y   | Y   |
-
 ## 📚 Documentation
 
 - **[Project Structure](docs/PROJECT_STRUCTURE.md)** - Documentation of folders
@@ -100,12 +94,15 @@ Send data directly to n8n automation workflows!
 ## 🐛 Troubleshooting
 
 ### Chrome Driver / Playwright Issues?
+
 → Some scrapers use Selenium and others use Playwright. Make sure your browsers are installed, e.g., `playwright install`.
 
 ### No Data Extracted?
+
 → Run with `--no-headless` to see if the website structure has changed or if there is a CAPTCHA.
 
 ### Website Changed?
+
 → If an error occurs during scrape, check the state script in `src/scrapers/` for updates to the CSS selectors.
 
 ## 📞 Quick Commands
