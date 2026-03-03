@@ -17,15 +17,17 @@ logger = logging.getLogger(__name__)
 
 
 def extract_service_fee_from_soup(soup):
-    """Cari <li> yang punya <strong> berisi 'Service fee', lalu ambil nilai $xxx dari li itu."""
+    """Cari <li> yang mengandung teks 'service fee', lalu ambil semua nilai $xxx dari li itu."""
+    fees = []
+
     for li in soup.find_all("li"):
-        strong = li.find("strong")
-        if strong and "service fee" in strong.get_text(strip=True).lower():
-            li_text = li.get_text(strip=True)
-            fees = re.findall(r"\$[\d,]+(?:\.\d{2})?", li_text)
-            if fees:
-                return ", ".join(fees)
-    return "-"
+        text = li.get_text(" ", strip=True).lower()
+        if "service fee" in text:
+            found = re.findall(r"\$[\d,]+(?:\.\d{2})?", text)
+            if found:
+                fees.extend(found)
+
+    return fees
 
 
 def fetch_and_parse(url, selector="#main.col-md-8"):
@@ -85,13 +87,25 @@ def scrape_act_subclass(subclass, url_general, url_overseas, url_canberra):
     text_overseas = get_clean_text(soup_overseas)
     text_canberra = get_clean_text(soup_canberra)
 
-    service_fee_value = "-"
-    for soup in [soup_overseas, soup_canberra, soup_general]:
+    # Ekstrak Service Fee dari setiap halaman dengan label nama halaman
+    pages = [
+        ("overseas", soup_overseas),
+        ("canberra", soup_canberra),
+        ("general", soup_general),
+    ]
+
+    service_fees = []
+    for name, soup in pages:
         if soup:
-            fee = extract_service_fee_from_soup(soup)
-            if fee != "-":
-                service_fee_value = fee
-                break
+            fees = extract_service_fee_from_soup(soup)
+            if fees:
+                for fee in fees:
+                    service_fees.append(f"{fee} ({name})")
+
+    if service_fees:
+        service_fee_value = ", ".join(service_fees)
+    else:
+        service_fee_value = "-"
 
     data = {
         "state code": "ACT",
