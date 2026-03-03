@@ -73,13 +73,9 @@ def get_clean_text(container):
     return container.get_text(separator="\n", strip=True)
 
 
-def scrape_act_all_streams():
-    """Scrape ACT subclass 190."""
-    url_general = "https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria"
-    url_overseas = "https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria/overseas-applicant-eligibility"
-    url_canberra = "https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria/canberra-resident-applicant-eligibility"
-
-    logger.info("=== Scraping ACT Subclass 190 ===")
+def scrape_act_subclass(subclass, url_general, url_overseas, url_canberra):
+    """Scrape ACT nomination criteria untuk subclass tertentu."""
+    logger.info(f"=== Scraping ACT Subclass {subclass} ===")
 
     soup_general = fetch_and_parse(url_general)
     soup_overseas = fetch_and_parse(url_overseas)
@@ -99,43 +95,7 @@ def scrape_act_all_streams():
 
     data = {
         "state code": "ACT",
-        "state stream": "190",
-        "General Requirements": text_general,
-        "Requirements Canberra Residents": text_canberra,
-        "Requirements overseas": text_overseas,
-        "service fee": service_fee_value,
-    }
-
-    return pd.DataFrame([data])
-
-
-def scrape_act_491():
-    """Scrape ACT subclass 491."""
-    url_general = "https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria"
-    url_overseas = "https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria/491-nomination-overseas-applicant-eligibility"
-    url_canberra = "https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria/491-nomination-canberra-resident-applicant-eligibility"
-
-    logger.info("=== Scraping ACT Subclass 491 ===")
-
-    soup_general = fetch_and_parse(url_general)
-    soup_overseas = fetch_and_parse(url_overseas)
-    soup_canberra = fetch_and_parse(url_canberra)
-
-    text_general = get_clean_text(soup_general)
-    text_overseas = get_clean_text(soup_overseas)
-    text_canberra = get_clean_text(soup_canberra)
-
-    service_fee_value = "-"
-    for soup in [soup_overseas, soup_canberra, soup_general]:
-        if soup:
-            fee = extract_service_fee_from_soup(soup)
-            if fee != "-":
-                service_fee_value = fee
-                break
-
-    data = {
-        "state code": "ACT",
-        "state stream": "491",
+        "state stream": str(subclass),
         "General Requirements": text_general,
         "Requirements Canberra Residents": text_canberra,
         "Requirements overseas": text_overseas,
@@ -172,10 +132,20 @@ def export_results(df):
 
 if __name__ == "__main__":
     # Baris 1: Subclass 190
-    df_190 = scrape_act_all_streams()
+    df_190 = scrape_act_subclass(
+        subclass=190,
+        url_general="https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria",
+        url_overseas="https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria/overseas-applicant-eligibility",
+        url_canberra="https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria/canberra-resident-applicant-eligibility",
+    )
 
     # Baris 2: Subclass 491
-    df_491 = scrape_act_491()
+    df_491 = scrape_act_subclass(
+        subclass=491,
+        url_general="https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria",
+        url_overseas="https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria/491-nomination-overseas-applicant-eligibility",
+        url_canberra="https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria/491-nomination-canberra-resident-applicant-eligibility",
+    )
 
     # Gabungkan jadi satu DataFrame
     final_df = pd.concat([df_190, df_491], ignore_index=True)
