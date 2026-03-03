@@ -1,10 +1,10 @@
 # Requirements Multi-State Scraper
 
-Extract **State and Territory Occupation List data** from 8 Australian states and territories, and normalize the results against the ANZSCO master list.
+Extract **# Requirements Multi-State Scraper** from 8 Australian states and territories
 
 ## 🎯 Purpose
 
-This tool automatically scrapes State and Territory occupation lists for migration programs from:
+This tool automatically scrapes State and Territory requirement lists for migration programs visa subclass 190 and 491from:
 **ACT, NSW, NT, QLD, SA, TAS, VIC, WA**
 
 It unifies the diverse formats from each state's website and maps the occupations to standardized ANZSCO codes.

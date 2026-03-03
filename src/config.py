@@ -91,12 +91,10 @@ os.makedirs(LOG_DIR, exist_ok=True)
 # Final output schema fields
 DATA_FIELDS = [
     "state_code",
-    "anzsco_unit_group_code",
-    "unit_group_name",
-    "anzsco_occupation_code",
-    "occupation_name",
-    "190",
-    "491",
+    "State Stream",
+    "Requirements Overseas",
+    "Requirements  Canberra Residents ",
+    "Service fee",
 ]
 
 # User Agent (to avoid being blocked)

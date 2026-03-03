@@ -1,7 +1,7 @@
 """
 Integration Smoke Tests — Live URL Scraping
 ===========================================
-Menguji scraper secara end-to-end dengan koneksi internet nyata 
+Menguji scraper secara end-to-end dengan koneksi internet nyata
 untuk memastikan struktur halaman target belum berubah.
 
 NOTE: Test ini membutuhkan koneksi internet dan Selenium WebDriver.
@@ -28,7 +28,7 @@ from src.scrapers import (
     tas_scraper,
     wa_scraper,
     act_scraper,
-    nt_scraper
+    nt_scraper,
 )
 
 # ── Konfigurasi Test ─────────────────────────────────────────────────────────
@@ -36,25 +36,38 @@ from src.scrapers import (
 # Tandai semua test di file ini sebagai 'integration'
 pytestmark = pytest.mark.integration
 
+
 def check_records(records: List[dict], state: str):
     """Utility to verify records returned by a scraper."""
     assert isinstance(records, list), f"[{state}] Output harus berupa list"
     assert len(records) > 0, f"[{state}] Tidak ada data yang ditemukan"
-    
+
     # Check sample record structure
     sample = records[0]
-    required_keys = {"state", "list_type", "raw_code", "raw_name", "visa_190", "visa_491"}
+    required_keys = {
+        "state",
+        "list_type",
+        "raw_code",
+        "raw_name",
+        "visa_190",
+        "visa_491",
+    }
     for key in required_keys:
         assert key in sample, f"[{state}] Missing key: {key}"
-        
-    print(f"\n  [OK] {state}: Found {len(records)} records. Sample: {sample['raw_name']} ({sample['raw_code']})")
+
+    print(
+        f"\n  [OK] {state}: Found {len(records)} records. Sample: {sample['raw_name']} ({sample['raw_code']})"
+    )
+
 
 # ── Integration Tests ────────────────────────────────────────────────────────
 
-class TestScraperIntegration:
 
+class TestScraperIntegration:
     def test_nsw_integration(self):
-        url = "https://www.nsw.gov.au/visas-and-migration/skilled-visas/nsw-skills-lists"
+        url = (
+            "https://www.nsw.gov.au/visas-and-migration/skilled-visas/nsw-skills-lists"
+        )
         records = nsw_scraper.scrape(url)
         check_records(records, "NSW")
 
@@ -75,7 +88,9 @@ class TestScraperIntegration:
         records = qld_scraper.scrape(url, list_type="offshore")
         check_records(records, "QLD Offshore")
 
-    @pytest.mark.xfail(reason="SA page frequently changes structure or uses advanced bot protection")
+    @pytest.mark.xfail(
+        reason="SA page frequently changes structure or uses advanced bot protection"
+    )
     def test_sa_integration(self):
         url = "https://migration.sa.gov.au/before-applying/work-in-sa/occupation-lists/occupations-list"
         records = sa_scraper.scrape(url)
