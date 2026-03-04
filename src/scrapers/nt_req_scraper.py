@@ -1,10 +1,10 @@
 import logging
 import os
-import re
 import pandas as pd
 from bs4 import BeautifulSoup
 # Pastikan playwright_helper tersedia di environment Anda
 # from playwright_helper import get_page_source_playwright 
+from scraper_utils import extract_service_fee, export_dataframe
 
 # ==========================
 # LINK SESUAI GAMBAR
@@ -21,14 +21,8 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 def extract_service_fee_from_soup(soup):
-    fees = []
-    for li in soup.find_all("li"):
-        text = li.get_text(" ", strip=True).lower()
-        if "service fee" in text or "application fee" in text:
-            found = re.findall(r"\$[\d,]+(?:\.\d{2})?", text)
-            if found:
-                fees.extend(found)
-    return fees
+    """Wrapper untuk extract_service_fee dari scraper_utils."""
+    return extract_service_fee(soup, keywords=["service fee", "application fee"])
 
 def get_clean_text(soup):
     """Fungsi umum untuk ekstraksi konten requirements"""
@@ -105,23 +99,13 @@ def scrape_nt():
     return pd.DataFrame(data)
 
 def export_results(df):
-    if df is None or df.empty:
-        logger.error("Data kosong.")
-        return
-
-    os.makedirs(_OUTPUT_DIR, exist_ok=True)
-    
-    # --- EXPORT JSON ---
-    json_path = os.path.join(_OUTPUT_DIR, "requirements_nt.json")
-    df.to_json(json_path, orient="records", indent=4, force_ascii=False)
-    
-    # --- EXPORT CSV & EXCEL (Opsional, agar tetap lengkap) ---
-    df.to_csv(os.path.join(_OUTPUT_DIR, "requirements_nt.csv"), index=False, encoding="utf-8-sig")
-    df.to_excel(os.path.join(_OUTPUT_DIR, "requirements_nt.xlsx"), index=False)
-
-    logger.info(f"Scraping selesai. File JSON disimpan di: {json_path}")
-    print("\nPreview Data:")
-    print(df[["state code", "state stream", "service fee"]])
+    """Export hasil scraping NT ke JSON, CSV, dan Excel."""
+    export_dataframe(
+        df,
+        output_dir=_OUTPUT_DIR,
+        filename_prefix="requirements_nt",
+        preview_columns=["state code", "state stream", "service fee"],
+    )
 
 if __name__ == "__main__":
     final_df = scrape_nt()
