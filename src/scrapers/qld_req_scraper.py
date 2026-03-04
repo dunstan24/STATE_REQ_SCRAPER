@@ -13,6 +13,9 @@ from bs4 import BeautifulSoup
 # ==========================
 URL_QLD = "https://migration.qld.gov.au/visa-options/skilled-visas/skilled-workers-living-in-queensland"
 URL_QLD_OUTSIDE="https://migration.qld.gov.au/visa-options/skilled-visas/skilled-workers-living-offshore"
+URL_QLD_BUILDING = "https://migration.qld.gov.au/visa-options/skilled-visas/building-and-construction-workers"
+URL_QLD_UNIVERSITY = "https://www.migration.qld.gov.au/visa-options/skilled-visas/graduates-of-a-queensland-university"
+URL_QLD_BUSINESS = "https://migration.qld.gov.au/visa-options/skilled-visas/small-business-owners-operating-in-regional-queensland"
 # ==========================
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -38,8 +41,47 @@ def extract_service_fee_from_soup(soup):
 
     return fees
 
+def parse_requirement_table(tbody):
 
-def get_clean_text(soup):
+    lines = []
+
+    for tr in tbody.find_all("tr"):
+
+        cells = tr.find_all("td")
+
+        if len(cells) < 2:
+            continue
+
+        header = cells[0].get_text(" ", strip=True)
+        value_cell = cells[1]
+
+        if header:
+            lines.append(header)
+
+        for tag in value_cell.find_all(["p", "li"]):
+
+            text = tag.get_text(" ", strip=True)
+
+            if text:
+                lines.append(f"- {text}")
+
+    return "\n".join(lines).strip()
+
+def extract_business_tables(soup):
+
+    tbodies = soup.find_all("tbody")
+
+    if len(tbodies) < 3:
+        return None
+
+    table1 = parse_requirement_table(tbodies[0])
+    table2 = parse_requirement_table(tbodies[1])
+    table3 = parse_requirement_table(tbodies[2])
+
+    return table1, table2, table3
+
+
+def get_clean_text(soup, url):
     """Fungsi umum untuk ekstraksi requirements.
 
     Untuk halaman QLD tertentu kita ingin memproses tabel yang berisi
@@ -50,9 +92,12 @@ def get_clean_text(soup):
     - Sel kolom pertama menjadi judul/baris atas.
     - Isi kolom kedua dipecah ke dalam paragraf/"li" lalu diberi bullet.
     """
-
-    container = soup.find("div", id=lambda x: x and x.startswith("component_"))
-
+    
+    # Special logic for university graduates page
+    if url == URL_QLD_UNIVERSITY:
+        container = soup.find("div", id="component_1540893")
+    else:
+        container = soup.find("div", id=lambda x: x and x.startswith("component_"))
     if not container:
         container = soup.find("body")
     # --- Remove common non-content blocks that often contain navigation/menu/footer
@@ -186,7 +231,7 @@ def scrape_page(url):
     if not soup:
         return "", []
 
-    text = get_clean_text(soup)
+    text = get_clean_text(soup, url)
 
     fees = extract_service_fee_from_soup(soup)
 
@@ -196,34 +241,106 @@ def scrape_page(url):
 def scrape_qld():
 
     logger.info("=== Scraping QLD Requirements ===")
-    # Scrape onshore page
+
+    # Onshore
     qld_text_onshore, qld_fees_onshore = scrape_page(URL_QLD)
 
-    # Scrape offshore page (new link provided by user)
+    # Offshore
     qld_text_offshore, qld_fees_offshore = scrape_page(URL_QLD_OUTSIDE)
 
-    # combine fees from both pages
-    all_fees = (qld_fees_onshore or []) + (qld_fees_offshore or [])
+    # Building pathway
+    qld_text_building, qld_fees_building = scrape_page(URL_QLD_BUILDING)
+
+    # University graduates
+    qld_text_university, qld_fees_university = scrape_page(URL_QLD_UNIVERSITY)
+
+    # -------------------------
+    # BUSINESS PAGE (3 TABLES)
+    # -------------------------
+
+    soup_business = fetch_and_parse(URL_QLD_BUSINESS)
+
+    table1 = ""
+    table2 = ""
+    table3 = ""
+
+    if soup_business:
+
+        tbodies = soup_business.find_all("tbody")
+
+        if len(tbodies) >= 3:
+
+            table1 = parse_requirement_table(tbodies[0])
+            table2 = parse_requirement_table(tbodies[1])
+            table3 = parse_requirement_table(tbodies[2])
+
+    # Combine all fees
+    all_fees = (
+        (qld_fees_onshore or [])
+        + (qld_fees_offshore or [])
+        + (qld_fees_building or [])
+        + (qld_fees_university or [])
+    )
+
     service_fee_val = ", ".join(sorted(set(all_fees))) if all_fees else "-"
 
     data = [
+
         {
             "state code": "QLD",
             "state stream": "Workers_Living_in_Queensland",
             "requirements": qld_text_onshore,
             "service fee": service_fee_val,
         },
+
         {
             "state code": "QLD",
             "state stream": "Workers_Living_offshore",
             "requirements": qld_text_offshore,
             "service fee": service_fee_val,
+        },
+
+        {
+            "state code": "QLD",
+            "state stream": "Building_and_Construction_Workforce_Pathway",
+            "requirements": qld_text_building,
+            "service fee": service_fee_val,
+        },
+
+        {
+            "state code": "QLD",
+            "state stream": "Graduates_of_a_Queensland_University",
+            "requirements": qld_text_university,
+            "service fee": service_fee_val,
+        },
+
+        # BUSINESS TABLE 1
+        {
+            "state code": "QLD",
+            "state stream": "Small_Business_Owners",
+            "requirements": table1,
+            "service fee": service_fee_val,
+        },
+
+        # BUSINESS TABLE 2
+        {
+            "state code": "QLD",
+            "state stream": "Additional requirements for Pathway 1 - Business purchase",
+            "requirements": table2,
+            "service fee": service_fee_val,
+        },
+
+        # BUSINESS TABLE 3
+        {
+            "state code": "QLD",
+            "state stream": "Additional requirements for Pathway 2 - Start up business",
+            "requirements": table3,
+            "service fee": service_fee_val,
         }
+
     ]
 
     return pd.DataFrame(data)
-
-
 def export_results(df):
 
     if df is None or df.empty:
