@@ -18,11 +18,21 @@ Scraper akan mengekstraksi informasi krusial (contohnya *General Requirements*, 
 Pastikan sistem komputer Anda memiliki **Python 3.9+** terinstal, beserta akses internet yang stabil.
 
 Kebutuhan library utama dapat dilihat pada file `requirements.txt`, termasuk namun tidak terbatas pada:
-- `selenium` & `webdriver-manager`
-- `beautifulsoup4` & `lxml`
-- `undetected-chromedriver`
-- `pandas` & `openpyxl` (untuk format output & export Excel)
-- `requests`
+
+**Scraping & Automation Engines:**
+- `selenium` & `webdriver-manager`: Untuk simulasi *browser* standar.
+- `undetected-chromedriver`: Untuk membypass blokir antarmuka bot dasar.
+- `playwright`: Engine headless canggih untuk scrape SPA atau tabel dinamis.
+- `camoufox[geoip]`: Browser khusus untuk mem-bypass prokteksi tinggi antarmuka bot seperti Cloudflare Turnstile (Sangat diperlukan untuk WA dan ACT).
+
+**Parser & Data Processing:**
+- `beautifulsoup4` & `lxml`: Untuk penguraian data HTML mentah menjadi format element tree yang dapat dicari.
+- `pandas`: Inti dari pemrosesan data, digunakan untuk normalisasi kolom dan normalisasi format baris tabel.
+- `openpyxl`: Digunakan Pandas untuk export dan membaca file Excel langsung.
+
+**HTTP Clients & Utilities:**
+- `requests`: Mengambil HTML statis secara langsung tanpa memuat browser (digunakan di endpoint tanpa proteksi kuat).
+- `python-dotenv`: Membaca environment variabels dari `.env`.
 
 ---
 
@@ -37,23 +47,25 @@ Kebutuhan library utama dapat dilihat pada file `requirements.txt`, termasuk nam
 2. **Buat dan Aktifkan Virtual Environment (Direkomendasikan)**
    ```bash
    # Pengguna Windows:
-   python -m venv venv
-   venv\Scripts\activate
+   python -m venv myenv
+   myenv\Scripts\activate
    
    # Pengguna macOS/Linux:
-   python3 -m venv venv
-   source venv/bin/activate
+   python3 -m venv myenv
+   source myenv/bin/activate
    ```
 
-3. **Install Dependensi Library**
+3. **Install Dependensi Library (Otomatis)**
+   Project ini sudah dilengkapi sistem _Auto-Setup_. Anda **TIDAK PERLU** menginstall library satu-per-satu secara manual. Langsung saja jalankan file scraper utama:
+
    ```bash
-   pip install -r requirements.txt
+   python src/scrapers/main_scraper.py
    ```
-   *(Opsional: Karena project kelihatannya menyertakan file pendukung playwright di beberapa tempat, jika Anda mendapati error bahwa module "playwright" tidak ditemukan, jalankan:)*
-   ```bash
-   pip install playwright
-   playwright install
-   ```
+   
+   Pada saat program baru pertama kali dijalankan, secara otomatis sistem akan mendeteksi library apa saja yang belum diinstall dan menjalankan perintah:
+   - `pip install -r requirements.txt`
+   - Mengunduh library *headless browser* Camoufox (`camoufox fetch`)
+   - Mengunduh *browser engine* milik Playwright (`playwright install chromium`).
 
 4. **Pengaturan Konfigurasi (Opsional)**
    Anda bisa melihat file `src/config.py` untuk menyesuaikan opsi seperti:

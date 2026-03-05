@@ -1018,3 +1018,754 @@
 2026-03-05 16:52:38,233 - INFO -     VIC   : OK (2 baris)
 2026-03-05 16:52:38,233 - INFO -     WA    : OK (2 baris)
 2026-03-05 16:52:38,233 - INFO - ============================================================
+2026-03-05 18:03:31,788 - WARNING - [Camoufox] 'camoufox' belum diinstall.
+Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+bypass_cf=True tidak akan berfungsi tanpa camoufox.
+2026-03-05 18:03:32,755 - INFO - ============================================================
+2026-03-05 18:03:32,758 - INFO -   MULAI: All State Visa Requirements Scraper
+2026-03-05 18:03:32,758 - INFO - ============================================================
+2026-03-05 18:03:32,758 - INFO - 
+============================================================
+2026-03-05 18:03:32,758 - INFO -   Starting: ACT
+2026-03-05 18:03:32,758 - INFO - ============================================================
+2026-03-05 18:03:32,758 - INFO - === Scraping ACT Subclass 190 ===
+2026-03-05 18:03:32,761 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria
+2026-03-05 18:03:32,762 - ERROR - [Camoufox] Module tidak tersedia. Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+2026-03-05 18:03:32,762 - ERROR - Gagal mendapatkan HTML. Cloudflare mungkin memblokir.
+2026-03-05 18:03:32,762 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria/overseas-applicant-eligibility
+2026-03-05 18:03:32,762 - ERROR - [Camoufox] Module tidak tersedia. Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+2026-03-05 18:03:32,762 - ERROR - Gagal mendapatkan HTML. Cloudflare mungkin memblokir.
+2026-03-05 18:03:32,762 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria/canberra-resident-applicant-eligibility
+2026-03-05 18:03:32,782 - ERROR - [Camoufox] Module tidak tersedia. Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+2026-03-05 18:03:32,783 - ERROR - Gagal mendapatkan HTML. Cloudflare mungkin memblokir.
+2026-03-05 18:03:32,792 - INFO - === Scraping ACT Subclass 491 ===
+2026-03-05 18:03:32,792 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria
+2026-03-05 18:03:32,792 - ERROR - [Camoufox] Module tidak tersedia. Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+2026-03-05 18:03:32,796 - ERROR - Gagal mendapatkan HTML. Cloudflare mungkin memblokir.
+2026-03-05 18:03:32,796 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria/491-nomination-overseas-applicant-eligibility
+2026-03-05 18:03:32,797 - ERROR - [Camoufox] Module tidak tersedia. Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+2026-03-05 18:03:32,797 - ERROR - Gagal mendapatkan HTML. Cloudflare mungkin memblokir.
+2026-03-05 18:03:32,797 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria/491-nomination-canberra-resident-applicant-eligibility
+2026-03-05 18:03:32,820 - ERROR - [Camoufox] Module tidak tersedia. Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+2026-03-05 18:03:32,820 - ERROR - Gagal mendapatkan HTML. Cloudflare mungkin memblokir.
+2026-03-05 18:03:32,897 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\act\requirements_act.xlsx
+2026-03-05 18:03:32,897 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\act
+2026-03-05 18:03:32,916 - INFO - [ACT] Selesai dalam 0.2s — 2 baris
+2026-03-05 18:03:32,917 - INFO - 
+============================================================
+2026-03-05 18:03:32,917 - INFO -   Starting: NT
+2026-03-05 18:03:32,917 - INFO - ============================================================
+2026-03-05 18:03:32,920 - INFO - === Scraping NT Requirements ===
+2026-03-05 18:03:32,920 - INFO - Fetching: https://australiasnorthernterritory.com.au/move/migrate-to-work/nt-government-visa-nomination
+2026-03-05 18:03:51,739 - INFO - [Playwright] Membuka: https://australiasnorthernterritory.com.au/move/migrate-to-work/nt-government-visa-nomination
+2026-03-05 18:03:57,052 - INFO - [Playwright] Selector 'div[id^='component_'] article' ditemukan.
+2026-03-05 18:04:00,074 - INFO - [Playwright] HTML didapat (214,299 chars)
+2026-03-05 18:04:00,888 - INFO - Fetching: https://australiasnorthernterritory.com.au/move/migrate-to-work/nt-government-visa-nomination/nt-offshore-migration-occupation-list
+2026-03-05 18:04:02,539 - INFO - [Playwright] Membuka: https://australiasnorthernterritory.com.au/move/migrate-to-work/nt-government-visa-nomination/nt-offshore-migration-occupation-list
+2026-03-05 18:04:03,902 - INFO - [Playwright] Selector 'div[id^='component_'] article' ditemukan.
+2026-03-05 18:04:06,942 - INFO - [Playwright] HTML didapat (238,497 chars)
+2026-03-05 18:04:07,832 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\nt\requirements_nt.xlsx
+2026-03-05 18:04:07,832 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\nt
+2026-03-05 18:04:07,839 - INFO - [NT] Selesai dalam 34.9s — 2 baris
+2026-03-05 18:04:07,839 - INFO - 
+============================================================
+2026-03-05 18:04:07,839 - INFO -   Starting: NSW
+2026-03-05 18:04:07,839 - INFO - ============================================================
+2026-03-05 18:04:07,839 - INFO - === Scraping NSW Subclass 190 ===
+2026-03-05 18:04:07,841 - INFO - Fetching: https://www.nsw.gov.au/visas-and-migration/skilled-visas/skilled-nominated-visa-subclass-190
+2026-03-05 18:04:09,435 - INFO - [Playwright] Membuka: https://www.nsw.gov.au/visas-and-migration/skilled-visas/skilled-nominated-visa-subclass-190
+2026-03-05 18:04:10,399 - INFO - [Playwright] Selector '.nsw-layout__main' ditemukan.
+2026-03-05 18:04:13,405 - INFO - [Playwright] HTML didapat (162,264 chars)
+2026-03-05 18:04:14,128 - INFO - Ditemukan 7 div.nsw-wysiwyg-content
+2026-03-05 18:04:14,128 - INFO - Matched wysiwyg-content: 'Basic Eligibility' → Basic Eligibility To be considered for NSW nomination, you must meet the followi...
+2026-03-05 18:04:14,128 - INFO - Ditemukan 7 div.nsw-wysiwyg-content
+2026-03-05 18:04:14,128 - INFO - Matched wysiwyg-content: 'Key Steps for Securing NSW Nomination' → Key Steps for Securing NSW Nomination The NSW nomination process involves severa...
+2026-03-05 18:04:14,128 - INFO - Ditemukan 7 div.nsw-wysiwyg-content
+2026-03-05 18:04:14,128 - INFO - Matched wysiwyg-content: 'Understanding Invitation Rounds and the NSW Skills List' → Understanding Invitation Rounds and the NSW Skills List Invitation rounds are an...
+2026-03-05 18:04:14,132 - INFO - === Scraping NSW Subclass 491 ===
+2026-03-05 18:04:14,132 - INFO - Fetching: https://www.nsw.gov.au/visas-and-migration/skilled-visas/skilled-work-regional-visa-subclass-491
+2026-03-05 18:04:15,663 - INFO - [Playwright] Membuka: https://www.nsw.gov.au/visas-and-migration/skilled-visas/skilled-work-regional-visa-subclass-491
+2026-03-05 18:04:16,488 - INFO - [Playwright] Selector '.nsw-layout__main' ditemukan.
+2026-03-05 18:04:19,509 - INFO - [Playwright] HTML didapat (177,073 chars)
+2026-03-05 18:04:20,258 - INFO - Ditemukan 14 div.nsw-wysiwyg-content
+2026-03-05 18:04:20,258 - INFO - Matched wysiwyg-content: 'About NSW Nomination' → About NSW Nomination NSW nomination for this visa allows skilled migrants to liv...
+2026-03-05 18:04:20,261 - INFO - Ditemukan 14 div.nsw-wysiwyg-content
+2026-03-05 18:04:20,261 - INFO - Matched wysiwyg-content: 'Understanding Invitation Rounds and the NSW Regional Skills List' → Understanding Invitation Rounds and the NSW Regional Skills List Invitation roun...
+2026-03-05 18:04:20,261 - INFO - Ditemukan 14 div.nsw-wysiwyg-content
+2026-03-05 18:04:20,262 - INFO - Matched wysiwyg-content: 'Key Steps for Securing NSW Nomination' → Key Steps for Securing NSW Nomination The NSW nomination process involves severa...
+2026-03-05 18:04:20,294 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\nsw\requirements_nsw.xlsx
+2026-03-05 18:04:20,296 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\nsw
+2026-03-05 18:04:20,299 - INFO - [NSW] Selesai dalam 12.5s — 2 baris
+2026-03-05 18:04:20,299 - INFO - 
+============================================================
+2026-03-05 18:04:20,299 - INFO -   Starting: QLD
+2026-03-05 18:04:20,299 - INFO - ============================================================
+2026-03-05 18:04:20,299 - INFO - === Scraping QLD: Workers_Living_in_Queensland ===
+2026-03-05 18:04:20,299 - INFO - Fetching: https://migration.qld.gov.au/visa-options/skilled-visas/skilled-workers-living-in-queensland
+2026-03-05 18:04:21,778 - INFO - [Playwright] Membuka: https://migration.qld.gov.au/visa-options/skilled-visas/skilled-workers-living-in-queensland
+2026-03-05 18:04:24,182 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:04:27,197 - INFO - [Playwright] HTML didapat (48,836 chars)
+2026-03-05 18:04:27,958 - WARNING - Container 'component_*' tidak ditemukan, fallback ke <body>.
+2026-03-05 18:04:27,962 - INFO - === Scraping QLD: Workers_Living_Offshore ===
+2026-03-05 18:04:27,962 - INFO - Fetching: https://migration.qld.gov.au/visa-options/skilled-visas/skilled-workers-living-offshore
+2026-03-05 18:04:29,423 - INFO - [Playwright] Membuka: https://migration.qld.gov.au/visa-options/skilled-visas/skilled-workers-living-offshore
+2026-03-05 18:04:31,938 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:04:34,955 - INFO - [Playwright] HTML didapat (47,813 chars)
+2026-03-05 18:04:35,747 - WARNING - Container 'component_*' tidak ditemukan, fallback ke <body>.
+2026-03-05 18:04:35,750 - INFO - === Scraping QLD: Building_and_Construction ===
+2026-03-05 18:04:35,750 - INFO - Fetching: https://migration.qld.gov.au/visa-options/skilled-visas/building-and-construction-workers
+2026-03-05 18:04:37,361 - INFO - [Playwright] Membuka: https://migration.qld.gov.au/visa-options/skilled-visas/building-and-construction-workers
+2026-03-05 18:04:39,680 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:04:42,679 - INFO - [Playwright] HTML didapat (48,926 chars)
+2026-03-05 18:04:43,503 - WARNING - Container 'component_*' tidak ditemukan, fallback ke <body>.
+2026-03-05 18:04:43,512 - INFO - === Scraping QLD: University_Graduates ===
+2026-03-05 18:04:43,512 - INFO - Fetching: https://www.migration.qld.gov.au/visa-options/skilled-visas/graduates-of-a-queensland-university
+2026-03-05 18:04:45,106 - INFO - [Playwright] Membuka: https://www.migration.qld.gov.au/visa-options/skilled-visas/graduates-of-a-queensland-university
+2026-03-05 18:04:47,863 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:04:50,871 - INFO - [Playwright] HTML didapat (48,476 chars)
+2026-03-05 18:04:51,638 - WARNING - Container 'component_*' tidak ditemukan, fallback ke <body>.
+2026-03-05 18:04:51,640 - INFO - === Scraping QLD: Small_Business_Owners ===
+2026-03-05 18:04:51,640 - INFO - Fetching: https://migration.qld.gov.au/visa-options/skilled-visas/small-business-owners-operating-in-regional-queensland
+2026-03-05 18:04:53,232 - INFO - [Playwright] Membuka: https://migration.qld.gov.au/visa-options/skilled-visas/small-business-owners-operating-in-regional-queensland
+2026-03-05 18:04:56,153 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:04:59,161 - INFO - [Playwright] HTML didapat (70,808 chars)
+2026-03-05 18:04:59,869 - WARNING - Container 'component_*' tidak ditemukan, fallback ke <body>.
+2026-03-05 18:04:59,898 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\qld\requirements_qld.xlsx
+2026-03-05 18:04:59,898 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\qld
+2026-03-05 18:04:59,905 - INFO - [QLD] Selesai dalam 39.6s — 7 baris
+2026-03-05 18:04:59,905 - INFO - 
+============================================================
+2026-03-05 18:04:59,905 - INFO -   Starting: SA
+2026-03-05 18:04:59,908 - INFO - ============================================================
+2026-03-05 18:04:59,908 - INFO - === Scraping SA: Skilled_Employment_in_South_Australia ===
+2026-03-05 18:04:59,908 - INFO - Fetching: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/skilled-employment-in-south-australia
+2026-03-05 18:05:01,412 - INFO - [Playwright] Membuka: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/skilled-employment-in-south-australia
+2026-03-05 18:05:04,612 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:05:07,629 - INFO - [Playwright] HTML didapat (233,816 chars)
+2026-03-05 18:05:08,439 - INFO - === Scraping SA: South_Australian_Graduates ===
+2026-03-05 18:05:08,439 - INFO - Fetching: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/south-australian-graduates
+2026-03-05 18:05:09,856 - INFO - [Playwright] Membuka: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/south-australian-graduates
+2026-03-05 18:05:13,016 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:05:16,038 - INFO - [Playwright] HTML didapat (233,054 chars)
+2026-03-05 18:05:16,797 - INFO - === Scraping SA: Outer_Regional_Skilled_Employment ===
+2026-03-05 18:05:16,797 - INFO - Fetching: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/outer-regional-skilled-employment
+2026-03-05 18:05:18,247 - INFO - [Playwright] Membuka: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/outer-regional-skilled-employment
+2026-03-05 18:05:21,414 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:05:24,429 - INFO - [Playwright] HTML didapat (236,084 chars)
+2026-03-05 18:05:25,151 - INFO - === Scraping SA: Moving_to_South_Australia_from_Overseas ===
+2026-03-05 18:05:25,151 - INFO - Fetching offshore (tab-click mode): https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/moving-to-south-australia-from-overseas
+2026-03-05 18:05:39,221 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\sa\requirements_sa.xlsx
+2026-03-05 18:05:39,221 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\sa
+2026-03-05 18:05:39,228 - INFO - [SA] Selesai dalam 39.3s — 4 baris
+2026-03-05 18:05:39,228 - INFO - 
+============================================================
+2026-03-05 18:05:39,228 - INFO -   Starting: TAS
+2026-03-05 18:05:39,230 - INFO - ============================================================
+2026-03-05 18:05:39,230 - INFO - 
+=== Pathway: TSE ===
+2026-03-05 18:05:39,230 - INFO - Fetching + manual click accordions: https://www.migration.tas.gov.au/skilled_migration/skilled-workers-and-graduates-living-in-Tasmania/tasmanian-skilled-employment-pathways-tse
+2026-03-05 18:05:44,045 - INFO -   Ditemukan 6 accordion button
+2026-03-05 18:05:49,246 - INFO -   Parsing subclass 190...
+2026-03-05 18:05:49,247 - INFO -   Heading ditemukan: 'Subclass 190 - Tasmanian Skilled Employment (TSE)' → accordion di bawahnya
+2026-03-05 18:05:49,247 - INFO -   Subclass 190 → 3 accordion-item ditemukan
+2026-03-05 18:05:49,251 - INFO -   Parsing subclass 491...
+2026-03-05 18:05:49,251 - INFO -   Heading ditemukan: 'Subclass 491 - Tasmanian Skilled Employment (TSE)' → accordion di bawahnya
+2026-03-05 18:05:49,254 - INFO -   Subclass 491 → 3 accordion-item ditemukan
+2026-03-05 18:05:49,258 - INFO - 
+=== Pathway: TSG ===
+2026-03-05 18:05:49,259 - INFO - Fetching + manual click accordions: https://www.migration.tas.gov.au/skilled_migration/skilled-workers-and-graduates-living-in-Tasmania/tasmanian-skilled-graduate-pathways-tsg
+2026-03-05 18:05:59,799 - INFO -   Ditemukan 6 accordion button
+2026-03-05 18:06:05,967 - INFO -   Parsing subclass 190...
+2026-03-05 18:06:05,969 - INFO -   Heading ditemukan: 'Subclass 190 - Tasmanian Skilled Graduate (TSG)' → accordion di bawahnya
+2026-03-05 18:06:05,969 - INFO -   Subclass 190 → 3 accordion-item ditemukan
+2026-03-05 18:06:05,973 - INFO -   Parsing subclass 491...
+2026-03-05 18:06:05,978 - INFO -   Heading ditemukan: 'Subclass 491 - Tasmanian Skilled Graduate (TSG)' → accordion di bawahnya
+2026-03-05 18:06:05,979 - INFO -   Subclass 491 → 3 accordion-item ditemukan
+2026-03-05 18:06:05,985 - INFO - 
+=== Pathway: TER ===
+2026-03-05 18:06:05,985 - INFO - Fetching + manual click accordions: https://www.migration.tas.gov.au/skilled_migration/skilled-workers-and-graduates-living-in-Tasmania/tasmanian-established-resident-pathways-ter
+2026-03-05 18:06:09,373 - INFO -   Ditemukan 6 accordion button
+2026-03-05 18:06:14,498 - INFO -   Parsing subclass 190...
+2026-03-05 18:06:14,498 - INFO -   Heading ditemukan: 'Subclass 190 - Tasmanian Established Resident Pathways (TER)' → accordion di bawahnya
+2026-03-05 18:06:14,498 - INFO -   Subclass 190 → 3 accordion-item ditemukan
+2026-03-05 18:06:14,505 - INFO -   Parsing subclass 491...
+2026-03-05 18:06:14,506 - INFO -   Heading ditemukan: 'Subclass 491 - Tasmanian Established Resident Pathways (TER)' → accordion di bawahnya
+2026-03-05 18:06:14,506 - INFO -   Subclass 491 → 3 accordion-item ditemukan
+2026-03-05 18:06:14,508 - INFO - 
+=== Pathway: TBO ===
+2026-03-05 18:06:14,508 - INFO - Fetching + manual click accordions: https://www.migration.tas.gov.au/skilled_migration/skilled-workers-and-graduates-living-in-Tasmania/tasmanian-business-operator-pathway-tbo
+2026-03-05 18:06:17,948 - INFO -   Ditemukan 3 accordion button
+2026-03-05 18:06:21,311 - INFO -   Parsing subclass 190...
+2026-03-05 18:06:21,312 - INFO -   Tidak ada heading/accordion untuk subclass 190 di halaman ini
+2026-03-05 18:06:21,312 - INFO -   Parsing subclass 491...
+2026-03-05 18:06:21,312 - INFO -   Accordion-button ditemukan: '491 TBO - Minimum requirements' → gunakan accordion ini
+2026-03-05 18:06:21,312 - INFO -   Subclass 491 → 3 accordion-item ditemukan
+2026-03-05 18:06:21,369 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\tas\requirements_tas.xlsx
+2026-03-05 18:06:21,369 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\tas
+2026-03-05 18:06:21,373 - INFO - [TAS] Selesai dalam 42.1s — 2 baris
+2026-03-05 18:06:21,373 - INFO - 
+============================================================
+2026-03-05 18:06:21,373 - INFO -   Starting: VIC
+2026-03-05 18:06:21,373 - INFO - ============================================================
+2026-03-05 18:06:21,373 - INFO - === Scraping VIC: Subclass_190 ===
+2026-03-05 18:06:21,378 - INFO - Fetching (accordion click mode): https://liveinmelbourne.vic.gov.au/migrate/skilled-migration-visas/skilled-nominated-visa-subclass-190
+2026-03-05 18:06:30,423 - INFO - Found 9 accordion headers
+2026-03-05 18:06:30,467 - INFO - Clicking accordion [0]: Basic eligibility
+2026-03-05 18:06:31,185 - INFO - Clicking accordion [1]: Victorian subclass 190 skilled visa nomination
+2026-03-05 18:06:31,908 - INFO - Clicking accordion [2]: Further eligibility requirements
+2026-03-05 18:06:32,608 - INFO - Clicking accordion [3]: Invitation to apply for Victorian nomination
+2026-03-05 18:06:33,317 - INFO - Clicking accordion [4]: Submitting a nomination application
+2026-03-05 18:06:34,038 - INFO - Clicking accordion [5]: Nomination application assessment
+2026-03-05 18:06:34,735 - INFO - Clicking accordion [6]: Nomination application outcome
+2026-03-05 18:06:35,447 - INFO - Clicking accordion [7]: Your nomination obligations
+2026-03-05 18:06:36,154 - INFO - Clicking accordion [8]: Terms and Conditions
+2026-03-05 18:06:38,619 - INFO - === Scraping VIC: Subclass_491 ===
+2026-03-05 18:06:38,619 - INFO - Fetching (accordion click mode): https://liveinmelbourne.vic.gov.au/migrate/skilled-migration-visas/491
+2026-03-05 18:06:54,089 - INFO - Found 9 accordion headers
+2026-03-05 18:06:54,132 - INFO - Clicking accordion [0]: Basic eligibility
+2026-03-05 18:06:54,861 - INFO - Clicking accordion [1]: Victorian subclass 491 skilled work regional visa nomination
+2026-03-05 18:06:55,575 - INFO - Clicking accordion [2]: Further eligibility requirements
+2026-03-05 18:06:56,278 - INFO - Clicking accordion [3]: Invitation to apply for Victorian nomination
+2026-03-05 18:06:56,991 - INFO - Clicking accordion [4]: Submitting a nomination application
+2026-03-05 18:06:57,728 - INFO - Clicking accordion [5]: Nomination application assessment
+2026-03-05 18:06:58,442 - INFO - Clicking accordion [6]: Nomination application outcome
+2026-03-05 18:06:59,151 - INFO - Clicking accordion [7]: Your nomination obligations
+2026-03-05 18:06:59,863 - INFO - Clicking accordion [8]: Terms and Conditions
+2026-03-05 18:07:02,280 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\vic\requirements_vic.xlsx
+2026-03-05 18:07:02,280 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\vic
+2026-03-05 18:07:02,285 - INFO - [VIC] Selesai dalam 40.9s — 2 baris
+2026-03-05 18:07:02,285 - INFO - 
+============================================================
+2026-03-05 18:07:02,285 - INFO -   Starting: WA
+2026-03-05 18:07:02,287 - INFO - ============================================================
+2026-03-05 18:07:02,287 - INFO - === Scraping WA Requirements ===
+2026-03-05 18:07:02,287 - INFO - Fetching: https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-nominated-190/points-table
+2026-03-05 18:07:02,288 - ERROR - [Camoufox] Module tidak tersedia. Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+2026-03-05 18:07:02,289 - ERROR - HTML tidak didapat.
+2026-03-05 18:07:02,289 - INFO - Fetching: https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-work-regional-provisional-491
+2026-03-05 18:07:02,290 - ERROR - [Camoufox] Module tidak tersedia. Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+2026-03-05 18:07:02,291 - ERROR - HTML tidak didapat.
+2026-03-05 18:07:02,315 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\wa\requirements_wa.xlsx
+2026-03-05 18:07:02,315 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\wa
+2026-03-05 18:07:02,324 - INFO - [WA] Selesai dalam 0.0s — 2 baris
+2026-03-05 18:07:02,420 - INFO - [Combined] XLSX (8 sheets) → c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\combined\requirements_all_states.xlsx
+2026-03-05 18:07:02,446 - INFO - [Combined] CSV  → c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\combined\requirements_all_states.csv
+2026-03-05 18:07:02,447 - INFO - [Combined] JSON → c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\combined\requirements_all_states.json
+2026-03-05 18:07:02,447 - INFO - [Combined] 23 total baris dari 8 state
+2026-03-05 18:07:02,449 - INFO - 
+============================================================
+2026-03-05 18:07:02,449 - INFO -   SELESAI — 8/8 states OK
+2026-03-05 18:07:02,449 - INFO -   Total waktu: 209.7s (3.5 menit)
+2026-03-05 18:07:02,449 - INFO -   Status per state:
+2026-03-05 18:07:02,449 - INFO -     ACT   : OK (2 baris)
+2026-03-05 18:07:02,449 - INFO -     NT    : OK (2 baris)
+2026-03-05 18:07:02,449 - INFO -     NSW   : OK (2 baris)
+2026-03-05 18:07:02,449 - INFO -     QLD   : OK (7 baris)
+2026-03-05 18:07:02,449 - INFO -     SA    : OK (4 baris)
+2026-03-05 18:07:02,453 - INFO -     TAS   : OK (2 baris)
+2026-03-05 18:07:02,453 - INFO -     VIC   : OK (2 baris)
+2026-03-05 18:07:02,453 - INFO -     WA    : OK (2 baris)
+2026-03-05 18:07:02,453 - INFO - ============================================================
+2026-03-05 18:16:25,923 - WARNING - [Camoufox] 'camoufox' belum diinstall.
+Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+bypass_cf=True tidak akan berfungsi tanpa camoufox.
+2026-03-05 18:16:26,243 - INFO - ============================================================
+2026-03-05 18:16:26,243 - INFO -   MULAI: All State Visa Requirements Scraper
+2026-03-05 18:16:26,243 - INFO - ============================================================
+2026-03-05 18:16:26,243 - INFO - 
+============================================================
+2026-03-05 18:16:26,243 - INFO -   Starting: ACT
+2026-03-05 18:16:26,243 - INFO - ============================================================
+2026-03-05 18:16:26,243 - INFO - === Scraping ACT Subclass 190 ===
+2026-03-05 18:16:26,243 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria
+2026-03-05 18:16:26,243 - ERROR - [Camoufox] Module tidak tersedia. Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+2026-03-05 18:16:26,247 - ERROR - Gagal mendapatkan HTML. Cloudflare mungkin memblokir.
+2026-03-05 18:16:26,247 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria/overseas-applicant-eligibility
+2026-03-05 18:16:26,247 - ERROR - [Camoufox] Module tidak tersedia. Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+2026-03-05 18:16:26,247 - ERROR - Gagal mendapatkan HTML. Cloudflare mungkin memblokir.
+2026-03-05 18:16:26,247 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria/canberra-resident-applicant-eligibility
+2026-03-05 18:16:26,249 - ERROR - [Camoufox] Module tidak tersedia. Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+2026-03-05 18:16:26,249 - ERROR - Gagal mendapatkan HTML. Cloudflare mungkin memblokir.
+2026-03-05 18:16:26,249 - INFO - === Scraping ACT Subclass 491 ===
+2026-03-05 18:16:26,251 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria
+2026-03-05 18:16:26,251 - ERROR - [Camoufox] Module tidak tersedia. Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+2026-03-05 18:16:26,252 - ERROR - Gagal mendapatkan HTML. Cloudflare mungkin memblokir.
+2026-03-05 18:16:26,252 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria/491-nomination-overseas-applicant-eligibility
+2026-03-05 18:16:26,254 - ERROR - [Camoufox] Module tidak tersedia. Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+2026-03-05 18:16:26,255 - ERROR - Gagal mendapatkan HTML. Cloudflare mungkin memblokir.
+2026-03-05 18:16:26,255 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria/491-nomination-canberra-resident-applicant-eligibility
+2026-03-05 18:16:26,262 - ERROR - [Camoufox] Module tidak tersedia. Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+2026-03-05 18:16:26,262 - ERROR - Gagal mendapatkan HTML. Cloudflare mungkin memblokir.
+2026-03-05 18:16:26,314 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\act\requirements_act.xlsx
+2026-03-05 18:16:26,314 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\act
+2026-03-05 18:16:26,323 - INFO - [ACT] Selesai dalam 0.1s — 2 baris
+2026-03-05 18:16:26,323 - INFO - 
+============================================================
+2026-03-05 18:16:26,323 - INFO -   Starting: NT
+2026-03-05 18:16:26,323 - INFO - ============================================================
+2026-03-05 18:16:26,323 - INFO - === Scraping NT Requirements ===
+2026-03-05 18:16:26,325 - INFO - Fetching: https://australiasnorthernterritory.com.au/move/migrate-to-work/nt-government-visa-nomination
+2026-03-05 18:16:29,399 - INFO - [Playwright] Membuka: https://australiasnorthernterritory.com.au/move/migrate-to-work/nt-government-visa-nomination
+2026-03-05 18:16:30,967 - INFO - [Playwright] Selector 'div[id^='component_'] article' ditemukan.
+2026-03-05 18:16:33,989 - INFO - [Playwright] HTML didapat (214,299 chars)
+2026-03-05 18:16:34,712 - INFO - Fetching: https://australiasnorthernterritory.com.au/move/migrate-to-work/nt-government-visa-nomination/nt-offshore-migration-occupation-list
+2026-03-05 18:16:36,088 - INFO - [Playwright] Membuka: https://australiasnorthernterritory.com.au/move/migrate-to-work/nt-government-visa-nomination/nt-offshore-migration-occupation-list
+2026-03-05 18:16:36,961 - INFO - [Playwright] Selector 'div[id^='component_'] article' ditemukan.
+2026-03-05 18:16:39,972 - INFO - [Playwright] HTML didapat (238,521 chars)
+2026-03-05 18:16:40,747 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\nt\requirements_nt.xlsx
+2026-03-05 18:16:40,747 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\nt
+2026-03-05 18:16:40,752 - INFO - [NT] Selesai dalam 14.4s — 2 baris
+2026-03-05 18:16:40,752 - INFO - 
+============================================================
+2026-03-05 18:16:40,752 - INFO -   Starting: NSW
+2026-03-05 18:16:40,752 - INFO - ============================================================
+2026-03-05 18:16:40,752 - INFO - === Scraping NSW Subclass 190 ===
+2026-03-05 18:16:40,752 - INFO - Fetching: https://www.nsw.gov.au/visas-and-migration/skilled-visas/skilled-nominated-visa-subclass-190
+2026-03-05 18:16:42,113 - INFO - [Playwright] Membuka: https://www.nsw.gov.au/visas-and-migration/skilled-visas/skilled-nominated-visa-subclass-190
+2026-03-05 18:16:43,808 - INFO - [Playwright] Selector '.nsw-layout__main' ditemukan.
+2026-03-05 18:16:46,830 - INFO - [Playwright] HTML didapat (162,183 chars)
+2026-03-05 18:16:47,596 - INFO - Ditemukan 7 div.nsw-wysiwyg-content
+2026-03-05 18:16:47,596 - INFO - Matched wysiwyg-content: 'Basic Eligibility' → Basic Eligibility To be considered for NSW nomination, you must meet the followi...
+2026-03-05 18:16:47,597 - INFO - Ditemukan 7 div.nsw-wysiwyg-content
+2026-03-05 18:16:47,597 - INFO - Matched wysiwyg-content: 'Key Steps for Securing NSW Nomination' → Key Steps for Securing NSW Nomination The NSW nomination process involves severa...
+2026-03-05 18:16:47,597 - INFO - Ditemukan 7 div.nsw-wysiwyg-content
+2026-03-05 18:16:47,597 - INFO - Matched wysiwyg-content: 'Understanding Invitation Rounds and the NSW Skills List' → Understanding Invitation Rounds and the NSW Skills List Invitation rounds are an...
+2026-03-05 18:16:47,599 - INFO - === Scraping NSW Subclass 491 ===
+2026-03-05 18:16:47,599 - INFO - Fetching: https://www.nsw.gov.au/visas-and-migration/skilled-visas/skilled-work-regional-visa-subclass-491
+2026-03-05 18:16:48,978 - INFO - [Playwright] Membuka: https://www.nsw.gov.au/visas-and-migration/skilled-visas/skilled-work-regional-visa-subclass-491
+2026-03-05 18:16:49,785 - INFO - [Playwright] Selector '.nsw-layout__main' ditemukan.
+2026-03-05 18:16:52,799 - INFO - [Playwright] HTML didapat (177,154 chars)
+2026-03-05 18:16:53,519 - INFO - Ditemukan 14 div.nsw-wysiwyg-content
+2026-03-05 18:16:53,519 - INFO - Matched wysiwyg-content: 'About NSW Nomination' → About NSW Nomination NSW nomination for this visa allows skilled migrants to liv...
+2026-03-05 18:16:53,523 - INFO - Ditemukan 14 div.nsw-wysiwyg-content
+2026-03-05 18:16:53,524 - INFO - Matched wysiwyg-content: 'Understanding Invitation Rounds and the NSW Regional Skills List' → Understanding Invitation Rounds and the NSW Regional Skills List Invitation roun...
+2026-03-05 18:16:53,524 - INFO - Ditemukan 14 div.nsw-wysiwyg-content
+2026-03-05 18:16:53,524 - INFO - Matched wysiwyg-content: 'Key Steps for Securing NSW Nomination' → Key Steps for Securing NSW Nomination The NSW nomination process involves severa...
+2026-03-05 18:16:53,552 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\nsw\requirements_nsw.xlsx
+2026-03-05 18:16:53,552 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\nsw
+2026-03-05 18:16:53,558 - INFO - [NSW] Selesai dalam 12.8s — 2 baris
+2026-03-05 18:16:53,558 - INFO - 
+============================================================
+2026-03-05 18:16:53,558 - INFO -   Starting: QLD
+2026-03-05 18:16:53,558 - INFO - ============================================================
+2026-03-05 18:16:53,558 - INFO - === Scraping QLD: Workers_Living_in_Queensland ===
+2026-03-05 18:16:53,558 - INFO - Fetching: https://migration.qld.gov.au/visa-options/skilled-visas/skilled-workers-living-in-queensland
+2026-03-05 18:16:54,905 - INFO - [Playwright] Membuka: https://migration.qld.gov.au/visa-options/skilled-visas/skilled-workers-living-in-queensland
+2026-03-05 18:16:57,202 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:17:00,215 - INFO - [Playwright] HTML didapat (48,836 chars)
+2026-03-05 18:17:00,958 - WARNING - Container 'component_*' tidak ditemukan, fallback ke <body>.
+2026-03-05 18:17:00,960 - INFO - === Scraping QLD: Workers_Living_Offshore ===
+2026-03-05 18:17:00,962 - INFO - Fetching: https://migration.qld.gov.au/visa-options/skilled-visas/skilled-workers-living-offshore
+2026-03-05 18:17:02,349 - INFO - [Playwright] Membuka: https://migration.qld.gov.au/visa-options/skilled-visas/skilled-workers-living-offshore
+2026-03-05 18:17:04,488 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:17:07,506 - INFO - [Playwright] HTML didapat (47,727 chars)
+2026-03-05 18:17:08,238 - WARNING - Container 'component_*' tidak ditemukan, fallback ke <body>.
+2026-03-05 18:17:08,238 - INFO - === Scraping QLD: Building_and_Construction ===
+2026-03-05 18:17:08,238 - INFO - Fetching: https://migration.qld.gov.au/visa-options/skilled-visas/building-and-construction-workers
+2026-03-05 18:17:09,562 - INFO - [Playwright] Membuka: https://migration.qld.gov.au/visa-options/skilled-visas/building-and-construction-workers
+2026-03-05 18:17:11,823 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:17:14,858 - INFO - [Playwright] HTML didapat (48,924 chars)
+2026-03-05 18:17:15,571 - WARNING - Container 'component_*' tidak ditemukan, fallback ke <body>.
+2026-03-05 18:17:15,573 - INFO - === Scraping QLD: University_Graduates ===
+2026-03-05 18:17:15,573 - INFO - Fetching: https://www.migration.qld.gov.au/visa-options/skilled-visas/graduates-of-a-queensland-university
+2026-03-05 18:17:16,966 - INFO - [Playwright] Membuka: https://www.migration.qld.gov.au/visa-options/skilled-visas/graduates-of-a-queensland-university
+2026-03-05 18:17:19,474 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:17:22,473 - INFO - [Playwright] HTML didapat (48,476 chars)
+2026-03-05 18:17:23,235 - WARNING - Container 'component_*' tidak ditemukan, fallback ke <body>.
+2026-03-05 18:17:23,238 - INFO - === Scraping QLD: Small_Business_Owners ===
+2026-03-05 18:17:23,238 - INFO - Fetching: https://migration.qld.gov.au/visa-options/skilled-visas/small-business-owners-operating-in-regional-queensland
+2026-03-05 18:17:24,650 - INFO - [Playwright] Membuka: https://migration.qld.gov.au/visa-options/skilled-visas/small-business-owners-operating-in-regional-queensland
+2026-03-05 18:17:27,162 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:17:30,163 - INFO - [Playwright] HTML didapat (70,894 chars)
+2026-03-05 18:17:30,912 - WARNING - Container 'component_*' tidak ditemukan, fallback ke <body>.
+2026-03-05 18:17:30,953 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\qld\requirements_qld.xlsx
+2026-03-05 18:17:30,953 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\qld
+2026-03-05 18:17:30,958 - INFO - [QLD] Selesai dalam 37.4s — 7 baris
+2026-03-05 18:17:30,960 - INFO - 
+============================================================
+2026-03-05 18:17:30,960 - INFO -   Starting: SA
+2026-03-05 18:17:30,960 - INFO - ============================================================
+2026-03-05 18:17:30,960 - INFO - === Scraping SA: Skilled_Employment_in_South_Australia ===
+2026-03-05 18:17:30,960 - INFO - Fetching: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/skilled-employment-in-south-australia
+2026-03-05 18:17:32,282 - INFO - [Playwright] Membuka: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/skilled-employment-in-south-australia
+2026-03-05 18:17:35,450 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:17:38,471 - INFO - [Playwright] HTML didapat (233,732 chars)
+2026-03-05 18:17:39,235 - INFO - === Scraping SA: South_Australian_Graduates ===
+2026-03-05 18:17:39,235 - INFO - Fetching: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/south-australian-graduates
+2026-03-05 18:17:40,529 - INFO - [Playwright] Membuka: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/south-australian-graduates
+2026-03-05 18:17:44,011 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:17:47,023 - INFO - [Playwright] HTML didapat (233,053 chars)
+2026-03-05 18:17:47,728 - INFO - === Scraping SA: Outer_Regional_Skilled_Employment ===
+2026-03-05 18:17:47,728 - INFO - Fetching: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/outer-regional-skilled-employment
+2026-03-05 18:17:49,061 - INFO - [Playwright] Membuka: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/outer-regional-skilled-employment
+2026-03-05 18:17:52,138 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:17:55,170 - INFO - [Playwright] HTML didapat (236,084 chars)
+2026-03-05 18:17:55,923 - INFO - === Scraping SA: Moving_to_South_Australia_from_Overseas ===
+2026-03-05 18:17:55,923 - INFO - Fetching offshore (tab-click mode): https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/moving-to-south-australia-from-overseas
+2026-03-05 18:18:09,786 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\sa\requirements_sa.xlsx
+2026-03-05 18:18:09,787 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\sa
+2026-03-05 18:18:09,788 - INFO - [SA] Selesai dalam 38.8s — 4 baris
+2026-03-05 18:18:09,788 - INFO - 
+============================================================
+2026-03-05 18:18:09,788 - INFO -   Starting: TAS
+2026-03-05 18:18:09,788 - INFO - ============================================================
+2026-03-05 18:18:09,793 - INFO - 
+=== Pathway: TSE ===
+2026-03-05 18:18:09,793 - INFO - Fetching + manual click accordions: https://www.migration.tas.gov.au/skilled_migration/skilled-workers-and-graduates-living-in-Tasmania/tasmanian-skilled-employment-pathways-tse
+2026-03-05 18:18:13,982 - INFO -   Ditemukan 6 accordion button
+2026-03-05 18:18:19,082 - INFO -   Parsing subclass 190...
+2026-03-05 18:18:19,082 - INFO -   Heading ditemukan: 'Subclass 190 - Tasmanian Skilled Employment (TSE)' → accordion di bawahnya
+2026-03-05 18:18:19,085 - INFO -   Subclass 190 → 3 accordion-item ditemukan
+2026-03-05 18:18:19,088 - INFO -   Parsing subclass 491...
+2026-03-05 18:18:19,088 - INFO -   Heading ditemukan: 'Subclass 491 - Tasmanian Skilled Employment (TSE)' → accordion di bawahnya
+2026-03-05 18:18:19,090 - INFO -   Subclass 491 → 3 accordion-item ditemukan
+2026-03-05 18:18:19,093 - INFO - 
+=== Pathway: TSG ===
+2026-03-05 18:18:19,093 - INFO - Fetching + manual click accordions: https://www.migration.tas.gov.au/skilled_migration/skilled-workers-and-graduates-living-in-Tasmania/tasmanian-skilled-graduate-pathways-tsg
+2026-03-05 18:18:22,602 - INFO -   Ditemukan 6 accordion button
+2026-03-05 18:18:27,673 - INFO -   Parsing subclass 190...
+2026-03-05 18:18:27,676 - INFO -   Heading ditemukan: 'Subclass 190 - Tasmanian Skilled Graduate (TSG)' → accordion di bawahnya
+2026-03-05 18:18:27,676 - INFO -   Subclass 190 → 3 accordion-item ditemukan
+2026-03-05 18:18:27,678 - INFO -   Parsing subclass 491...
+2026-03-05 18:18:27,681 - INFO -   Heading ditemukan: 'Subclass 491 - Tasmanian Skilled Graduate (TSG)' → accordion di bawahnya
+2026-03-05 18:18:27,682 - INFO -   Subclass 491 → 3 accordion-item ditemukan
+2026-03-05 18:18:27,685 - INFO - 
+=== Pathway: TER ===
+2026-03-05 18:18:27,685 - INFO - Fetching + manual click accordions: https://www.migration.tas.gov.au/skilled_migration/skilled-workers-and-graduates-living-in-Tasmania/tasmanian-established-resident-pathways-ter
+2026-03-05 18:18:30,996 - INFO -   Ditemukan 6 accordion button
+2026-03-05 18:18:36,054 - INFO -   Parsing subclass 190...
+2026-03-05 18:18:36,054 - INFO -   Heading ditemukan: 'Subclass 190 - Tasmanian Established Resident Pathways (TER)' → accordion di bawahnya
+2026-03-05 18:18:36,054 - INFO -   Subclass 190 → 3 accordion-item ditemukan
+2026-03-05 18:18:36,060 - INFO -   Parsing subclass 491...
+2026-03-05 18:18:36,062 - INFO -   Heading ditemukan: 'Subclass 491 - Tasmanian Established Resident Pathways (TER)' → accordion di bawahnya
+2026-03-05 18:18:36,062 - INFO -   Subclass 491 → 3 accordion-item ditemukan
+2026-03-05 18:18:36,064 - INFO - 
+=== Pathway: TBO ===
+2026-03-05 18:18:36,064 - INFO - Fetching + manual click accordions: https://www.migration.tas.gov.au/skilled_migration/skilled-workers-and-graduates-living-in-Tasmania/tasmanian-business-operator-pathway-tbo
+2026-03-05 18:18:39,435 - INFO -   Ditemukan 3 accordion button
+2026-03-05 18:18:42,888 - INFO -   Parsing subclass 190...
+2026-03-05 18:18:42,888 - INFO -   Tidak ada heading/accordion untuk subclass 190 di halaman ini
+2026-03-05 18:18:42,896 - INFO -   Parsing subclass 491...
+2026-03-05 18:18:42,897 - INFO -   Accordion-button ditemukan: '491 TBO - Minimum requirements' → gunakan accordion ini
+2026-03-05 18:18:42,897 - INFO -   Subclass 491 → 3 accordion-item ditemukan
+2026-03-05 18:18:42,955 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\tas\requirements_tas.xlsx
+2026-03-05 18:18:42,955 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\tas
+2026-03-05 18:18:42,958 - INFO - [TAS] Selesai dalam 33.2s — 2 baris
+2026-03-05 18:18:42,961 - INFO - 
+============================================================
+2026-03-05 18:18:42,961 - INFO -   Starting: VIC
+2026-03-05 18:18:42,961 - INFO - ============================================================
+2026-03-05 18:18:42,962 - INFO - === Scraping VIC: Subclass_190 ===
+2026-03-05 18:18:42,962 - INFO - Fetching (accordion click mode): https://liveinmelbourne.vic.gov.au/migrate/skilled-migration-visas/skilled-nominated-visa-subclass-190
+2026-03-05 18:18:51,537 - INFO - Found 9 accordion headers
+2026-03-05 18:18:51,585 - INFO - Clicking accordion [0]: Basic eligibility
+2026-03-05 18:18:52,317 - INFO - Clicking accordion [1]: Victorian subclass 190 skilled visa nomination
+2026-03-05 18:18:53,032 - INFO - Clicking accordion [2]: Further eligibility requirements
+2026-03-05 18:18:53,739 - INFO - Clicking accordion [3]: Invitation to apply for Victorian nomination
+2026-03-05 18:18:54,438 - INFO - Clicking accordion [4]: Submitting a nomination application
+2026-03-05 18:18:55,164 - INFO - Clicking accordion [5]: Nomination application assessment
+2026-03-05 18:18:55,867 - INFO - Clicking accordion [6]: Nomination application outcome
+2026-03-05 18:18:56,562 - INFO - Clicking accordion [7]: Your nomination obligations
+2026-03-05 18:18:57,286 - INFO - Clicking accordion [8]: Terms and Conditions
+2026-03-05 18:18:59,702 - INFO - === Scraping VIC: Subclass_491 ===
+2026-03-05 18:18:59,702 - INFO - Fetching (accordion click mode): https://liveinmelbourne.vic.gov.au/migrate/skilled-migration-visas/491
+2026-03-05 18:19:07,397 - INFO - Found 9 accordion headers
+2026-03-05 18:19:07,443 - INFO - Clicking accordion [0]: Basic eligibility
+2026-03-05 18:19:08,166 - INFO - Clicking accordion [1]: Victorian subclass 491 skilled work regional visa nomination
+2026-03-05 18:19:08,885 - INFO - Clicking accordion [2]: Further eligibility requirements
+2026-03-05 18:19:09,573 - INFO - Clicking accordion [3]: Invitation to apply for Victorian nomination
+2026-03-05 18:19:10,282 - INFO - Clicking accordion [4]: Submitting a nomination application
+2026-03-05 18:19:10,995 - INFO - Clicking accordion [5]: Nomination application assessment
+2026-03-05 18:19:11,690 - INFO - Clicking accordion [6]: Nomination application outcome
+2026-03-05 18:19:12,402 - INFO - Clicking accordion [7]: Your nomination obligations
+2026-03-05 18:19:13,112 - INFO - Clicking accordion [8]: Terms and Conditions
+2026-03-05 18:19:15,554 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\vic\requirements_vic.xlsx
+2026-03-05 18:19:15,554 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\vic
+2026-03-05 18:19:15,558 - INFO - [VIC] Selesai dalam 32.6s — 2 baris
+2026-03-05 18:19:15,558 - INFO - 
+============================================================
+2026-03-05 18:19:15,558 - INFO -   Starting: WA
+2026-03-05 18:19:15,558 - INFO - ============================================================
+2026-03-05 18:19:15,558 - INFO - === Scraping WA Requirements ===
+2026-03-05 18:19:15,558 - INFO - Fetching: https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-nominated-190/points-table
+2026-03-05 18:19:15,560 - ERROR - [Camoufox] Module tidak tersedia. Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+2026-03-05 18:19:15,561 - ERROR - HTML tidak didapat.
+2026-03-05 18:19:15,562 - INFO - Fetching: https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-work-regional-provisional-491
+2026-03-05 18:19:15,562 - ERROR - [Camoufox] Module tidak tersedia. Jalankan: pip install camoufox[geoip] && python -m camoufox fetch
+2026-03-05 18:19:15,562 - ERROR - HTML tidak didapat.
+2026-03-05 18:19:15,592 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\wa\requirements_wa.xlsx
+2026-03-05 18:19:15,592 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\wa
+2026-03-05 18:19:15,599 - INFO - [WA] Selesai dalam 0.0s — 2 baris
+2026-03-05 18:19:15,702 - INFO - [Combined] XLSX (8 sheets) → c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\combined\requirements_all_states.xlsx
+2026-03-05 18:19:15,708 - INFO - [Combined] CSV  → c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\combined\requirements_all_states.csv
+2026-03-05 18:19:15,708 - INFO - [Combined] JSON → c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\combined\requirements_all_states.json
+2026-03-05 18:19:15,708 - INFO - [Combined] 23 total baris dari 8 state
+2026-03-05 18:19:15,711 - INFO - 
+============================================================
+2026-03-05 18:19:15,711 - INFO -   SELESAI — 8/8 states OK
+2026-03-05 18:19:15,711 - INFO -   Total waktu: 169.5s (2.8 menit)
+2026-03-05 18:19:15,711 - INFO -   Status per state:
+2026-03-05 18:19:15,711 - INFO -     ACT   : OK (2 baris)
+2026-03-05 18:19:15,711 - INFO -     NT    : OK (2 baris)
+2026-03-05 18:19:15,711 - INFO -     NSW   : OK (2 baris)
+2026-03-05 18:19:15,714 - INFO -     QLD   : OK (7 baris)
+2026-03-05 18:19:15,714 - INFO -     SA    : OK (4 baris)
+2026-03-05 18:19:15,714 - INFO -     TAS   : OK (2 baris)
+2026-03-05 18:19:15,714 - INFO -     VIC   : OK (2 baris)
+2026-03-05 18:19:15,714 - INFO -     WA    : OK (2 baris)
+2026-03-05 18:19:15,714 - INFO - ============================================================
+2026-03-05 18:21:50,597 - INFO - ============================================================
+2026-03-05 18:21:50,597 - INFO -   MULAI: All State Visa Requirements Scraper
+2026-03-05 18:21:50,597 - INFO - ============================================================
+2026-03-05 18:21:50,602 - INFO - 
+============================================================
+2026-03-05 18:21:50,602 - INFO -   Starting: ACT
+2026-03-05 18:21:50,602 - INFO - ============================================================
+2026-03-05 18:21:50,602 - INFO - === Scraping ACT Subclass 190 ===
+2026-03-05 18:21:50,602 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria
+2026-03-05 18:22:17,991 - INFO - [Camoufox] Membuka: https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria
+2026-03-05 18:22:22,023 - INFO - [Camoufox] Selector '#main.col-md-8' ditemukan.
+2026-03-05 18:22:25,026 - INFO - [Camoufox] HTML didapat (52,216 chars)
+2026-03-05 18:22:25,635 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria/overseas-applicant-eligibility
+2026-03-05 18:22:31,442 - INFO - [Camoufox] Membuka: https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria/overseas-applicant-eligibility
+2026-03-05 18:22:33,955 - INFO - [Camoufox] Selector '#main.col-md-8' ditemukan.
+2026-03-05 18:22:36,965 - INFO - [Camoufox] HTML didapat (57,090 chars)
+2026-03-05 18:22:37,538 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria/canberra-resident-applicant-eligibility
+2026-03-05 18:22:43,414 - INFO - [Camoufox] Membuka: https://www.act.gov.au/migration/skilled-migrants/190-nomination-criteria/canberra-resident-applicant-eligibility
+2026-03-05 18:22:46,009 - INFO - [Camoufox] Selector '#main.col-md-8' ditemukan.
+2026-03-05 18:22:49,041 - INFO - [Camoufox] HTML didapat (59,648 chars)
+2026-03-05 18:22:49,617 - INFO - === Scraping ACT Subclass 491 ===
+2026-03-05 18:22:49,617 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria
+2026-03-05 18:22:55,130 - INFO - [Camoufox] Membuka: https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria
+2026-03-05 18:22:57,200 - INFO - [Camoufox] Selector '#main.col-md-8' ditemukan.
+2026-03-05 18:23:00,222 - INFO - [Camoufox] HTML didapat (52,305 chars)
+2026-03-05 18:23:00,759 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria/491-nomination-overseas-applicant-eligibility
+2026-03-05 18:23:12,662 - INFO - [Camoufox] Membuka: https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria/491-nomination-overseas-applicant-eligibility
+2026-03-05 18:23:15,070 - INFO - [Camoufox] Selector '#main.col-md-8' ditemukan.
+2026-03-05 18:23:18,084 - INFO - [Camoufox] HTML didapat (56,953 chars)
+2026-03-05 18:23:18,633 - INFO - Fetching: https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria/491-nomination-canberra-resident-applicant-eligibility
+2026-03-05 18:23:24,352 - INFO - [Camoufox] Membuka: https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria/491-nomination-canberra-resident-applicant-eligibility
+2026-03-05 18:23:26,529 - INFO - [Camoufox] Selector '#main.col-md-8' ditemukan.
+2026-03-05 18:23:29,545 - INFO - [Camoufox] HTML didapat (59,536 chars)
+2026-03-05 18:23:30,116 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\act\requirements_act.xlsx
+2026-03-05 18:23:30,116 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\act
+2026-03-05 18:23:30,122 - INFO - [ACT] Selesai dalam 99.5s — 2 baris
+2026-03-05 18:23:30,123 - INFO - 
+============================================================
+2026-03-05 18:23:30,123 - INFO -   Starting: NT
+2026-03-05 18:23:30,123 - INFO - ============================================================
+2026-03-05 18:23:30,124 - INFO - === Scraping NT Requirements ===
+2026-03-05 18:23:30,124 - INFO - Fetching: https://australiasnorthernterritory.com.au/move/migrate-to-work/nt-government-visa-nomination
+2026-03-05 18:23:31,519 - INFO - [Playwright] Membuka: https://australiasnorthernterritory.com.au/move/migrate-to-work/nt-government-visa-nomination
+2026-03-05 18:23:32,904 - INFO - [Playwright] Selector 'div[id^='component_'] article' ditemukan.
+2026-03-05 18:23:35,928 - INFO - [Playwright] HTML didapat (214,299 chars)
+2026-03-05 18:23:36,602 - INFO - Fetching: https://australiasnorthernterritory.com.au/move/migrate-to-work/nt-government-visa-nomination/nt-offshore-migration-occupation-list
+2026-03-05 18:23:37,914 - INFO - [Playwright] Membuka: https://australiasnorthernterritory.com.au/move/migrate-to-work/nt-government-visa-nomination/nt-offshore-migration-occupation-list
+2026-03-05 18:23:38,869 - INFO - [Playwright] Selector 'div[id^='component_'] article' ditemukan.
+2026-03-05 18:23:41,903 - INFO - [Playwright] HTML didapat (238,477 chars)
+2026-03-05 18:23:42,678 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\nt\requirements_nt.xlsx
+2026-03-05 18:23:42,678 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\nt
+2026-03-05 18:23:42,682 - INFO - [NT] Selesai dalam 12.6s — 2 baris
+2026-03-05 18:23:42,682 - INFO - 
+============================================================
+2026-03-05 18:23:42,685 - INFO -   Starting: NSW
+2026-03-05 18:23:42,685 - INFO - ============================================================
+2026-03-05 18:23:42,685 - INFO - === Scraping NSW Subclass 190 ===
+2026-03-05 18:23:42,685 - INFO - Fetching: https://www.nsw.gov.au/visas-and-migration/skilled-visas/skilled-nominated-visa-subclass-190
+2026-03-05 18:23:44,030 - INFO - [Playwright] Membuka: https://www.nsw.gov.au/visas-and-migration/skilled-visas/skilled-nominated-visa-subclass-190
+2026-03-05 18:23:44,832 - INFO - [Playwright] Selector '.nsw-layout__main' ditemukan.
+2026-03-05 18:23:47,841 - INFO - [Playwright] HTML didapat (162,264 chars)
+2026-03-05 18:23:48,562 - INFO - Ditemukan 7 div.nsw-wysiwyg-content
+2026-03-05 18:23:48,562 - INFO - Matched wysiwyg-content: 'Basic Eligibility' → Basic Eligibility To be considered for NSW nomination, you must meet the followi...
+2026-03-05 18:23:48,564 - INFO - Ditemukan 7 div.nsw-wysiwyg-content
+2026-03-05 18:23:48,564 - INFO - Matched wysiwyg-content: 'Key Steps for Securing NSW Nomination' → Key Steps for Securing NSW Nomination The NSW nomination process involves severa...
+2026-03-05 18:23:48,565 - INFO - Ditemukan 7 div.nsw-wysiwyg-content
+2026-03-05 18:23:48,565 - INFO - Matched wysiwyg-content: 'Understanding Invitation Rounds and the NSW Skills List' → Understanding Invitation Rounds and the NSW Skills List Invitation rounds are an...
+2026-03-05 18:23:48,565 - INFO - === Scraping NSW Subclass 491 ===
+2026-03-05 18:23:48,565 - INFO - Fetching: https://www.nsw.gov.au/visas-and-migration/skilled-visas/skilled-work-regional-visa-subclass-491
+2026-03-05 18:23:49,864 - INFO - [Playwright] Membuka: https://www.nsw.gov.au/visas-and-migration/skilled-visas/skilled-work-regional-visa-subclass-491
+2026-03-05 18:23:50,540 - INFO - [Playwright] Selector '.nsw-layout__main' ditemukan.
+2026-03-05 18:23:53,551 - INFO - [Playwright] HTML didapat (177,156 chars)
+2026-03-05 18:23:54,221 - INFO - Ditemukan 14 div.nsw-wysiwyg-content
+2026-03-05 18:23:54,221 - INFO - Matched wysiwyg-content: 'About NSW Nomination' → About NSW Nomination NSW nomination for this visa allows skilled migrants to liv...
+2026-03-05 18:23:54,223 - INFO - Ditemukan 14 div.nsw-wysiwyg-content
+2026-03-05 18:23:54,224 - INFO - Matched wysiwyg-content: 'Understanding Invitation Rounds and the NSW Regional Skills List' → Understanding Invitation Rounds and the NSW Regional Skills List Invitation roun...
+2026-03-05 18:23:54,224 - INFO - Ditemukan 14 div.nsw-wysiwyg-content
+2026-03-05 18:23:54,224 - INFO - Matched wysiwyg-content: 'Key Steps for Securing NSW Nomination' → Key Steps for Securing NSW Nomination The NSW nomination process involves severa...
+2026-03-05 18:23:54,247 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\nsw\requirements_nsw.xlsx
+2026-03-05 18:23:54,249 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\nsw
+2026-03-05 18:23:54,253 - INFO - [NSW] Selesai dalam 11.6s — 2 baris
+2026-03-05 18:23:54,256 - INFO - 
+============================================================
+2026-03-05 18:23:54,256 - INFO -   Starting: QLD
+2026-03-05 18:23:54,256 - INFO - ============================================================
+2026-03-05 18:23:54,256 - INFO - === Scraping QLD: Workers_Living_in_Queensland ===
+2026-03-05 18:23:54,256 - INFO - Fetching: https://migration.qld.gov.au/visa-options/skilled-visas/skilled-workers-living-in-queensland
+2026-03-05 18:23:55,599 - INFO - [Playwright] Membuka: https://migration.qld.gov.au/visa-options/skilled-visas/skilled-workers-living-in-queensland
+2026-03-05 18:23:57,787 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:24:00,788 - INFO - [Playwright] HTML didapat (48,836 chars)
+2026-03-05 18:24:01,524 - WARNING - Container 'component_*' tidak ditemukan, fallback ke <body>.
+2026-03-05 18:24:01,528 - INFO - === Scraping QLD: Workers_Living_Offshore ===
+2026-03-05 18:24:01,528 - INFO - Fetching: https://migration.qld.gov.au/visa-options/skilled-visas/skilled-workers-living-offshore
+2026-03-05 18:24:02,826 - INFO - [Playwright] Membuka: https://migration.qld.gov.au/visa-options/skilled-visas/skilled-workers-living-offshore
+2026-03-05 18:24:05,123 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:24:08,138 - INFO - [Playwright] HTML didapat (47,727 chars)
+2026-03-05 18:24:08,928 - WARNING - Container 'component_*' tidak ditemukan, fallback ke <body>.
+2026-03-05 18:24:08,935 - INFO - === Scraping QLD: Building_and_Construction ===
+2026-03-05 18:24:08,935 - INFO - Fetching: https://migration.qld.gov.au/visa-options/skilled-visas/building-and-construction-workers
+2026-03-05 18:24:10,223 - INFO - [Playwright] Membuka: https://migration.qld.gov.au/visa-options/skilled-visas/building-and-construction-workers
+2026-03-05 18:24:12,929 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:24:15,940 - INFO - [Playwright] HTML didapat (48,924 chars)
+2026-03-05 18:24:16,663 - WARNING - Container 'component_*' tidak ditemukan, fallback ke <body>.
+2026-03-05 18:24:16,663 - INFO - === Scraping QLD: University_Graduates ===
+2026-03-05 18:24:16,663 - INFO - Fetching: https://www.migration.qld.gov.au/visa-options/skilled-visas/graduates-of-a-queensland-university
+2026-03-05 18:24:17,971 - INFO - [Playwright] Membuka: https://www.migration.qld.gov.au/visa-options/skilled-visas/graduates-of-a-queensland-university
+2026-03-05 18:24:20,336 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:24:23,332 - INFO - [Playwright] HTML didapat (48,562 chars)
+2026-03-05 18:24:24,016 - WARNING - Container 'component_*' tidak ditemukan, fallback ke <body>.
+2026-03-05 18:24:24,020 - INFO - === Scraping QLD: Small_Business_Owners ===
+2026-03-05 18:24:24,020 - INFO - Fetching: https://migration.qld.gov.au/visa-options/skilled-visas/small-business-owners-operating-in-regional-queensland
+2026-03-05 18:24:25,312 - INFO - [Playwright] Membuka: https://migration.qld.gov.au/visa-options/skilled-visas/small-business-owners-operating-in-regional-queensland
+2026-03-05 18:24:27,814 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:24:30,827 - INFO - [Playwright] HTML didapat (70,810 chars)
+2026-03-05 18:24:31,538 - WARNING - Container 'component_*' tidak ditemukan, fallback ke <body>.
+2026-03-05 18:24:31,571 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\qld\requirements_qld.xlsx
+2026-03-05 18:24:31,571 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\qld
+2026-03-05 18:24:31,575 - INFO - [QLD] Selesai dalam 37.3s — 7 baris
+2026-03-05 18:24:31,575 - INFO - 
+============================================================
+2026-03-05 18:24:31,575 - INFO -   Starting: SA
+2026-03-05 18:24:31,575 - INFO - ============================================================
+2026-03-05 18:24:31,578 - INFO - === Scraping SA: Skilled_Employment_in_South_Australia ===
+2026-03-05 18:24:31,579 - INFO - Fetching: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/skilled-employment-in-south-australia
+2026-03-05 18:24:32,908 - INFO - [Playwright] Membuka: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/skilled-employment-in-south-australia
+2026-03-05 18:24:35,999 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:24:39,025 - INFO - [Playwright] HTML didapat (233,730 chars)
+2026-03-05 18:24:39,715 - INFO - === Scraping SA: South_Australian_Graduates ===
+2026-03-05 18:24:39,715 - INFO - Fetching: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/south-australian-graduates
+2026-03-05 18:24:41,013 - INFO - [Playwright] Membuka: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/south-australian-graduates
+2026-03-05 18:24:44,075 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:24:47,102 - INFO - [Playwright] HTML didapat (233,054 chars)
+2026-03-05 18:24:47,801 - INFO - === Scraping SA: Outer_Regional_Skilled_Employment ===
+2026-03-05 18:24:47,802 - INFO - Fetching: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/outer-regional-skilled-employment
+2026-03-05 18:24:49,147 - INFO - [Playwright] Membuka: https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/outer-regional-skilled-employment
+2026-03-05 18:24:52,232 - INFO - [Playwright] Selector 'body' ditemukan.
+2026-03-05 18:24:55,252 - INFO - [Playwright] HTML didapat (236,084 chars)
+2026-03-05 18:24:55,890 - INFO - === Scraping SA: Moving_to_South_Australia_from_Overseas ===
+2026-03-05 18:24:55,892 - INFO - Fetching offshore (tab-click mode): https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/moving-to-south-australia-from-overseas
+2026-03-05 18:25:08,303 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\sa\requirements_sa.xlsx
+2026-03-05 18:25:08,303 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\sa
+2026-03-05 18:25:08,308 - INFO - [SA] Selesai dalam 36.7s — 4 baris
+2026-03-05 18:25:08,308 - INFO - 
+============================================================
+2026-03-05 18:25:08,308 - INFO -   Starting: TAS
+2026-03-05 18:25:08,308 - INFO - ============================================================
+2026-03-05 18:25:08,308 - INFO - 
+=== Pathway: TSE ===
+2026-03-05 18:25:08,311 - INFO - Fetching + manual click accordions: https://www.migration.tas.gov.au/skilled_migration/skilled-workers-and-graduates-living-in-Tasmania/tasmanian-skilled-employment-pathways-tse
+2026-03-05 18:25:12,138 - INFO -   Ditemukan 6 accordion button
+2026-03-05 18:25:17,102 - INFO -   Parsing subclass 190...
+2026-03-05 18:25:17,102 - INFO -   Heading ditemukan: 'Subclass 190 - Tasmanian Skilled Employment (TSE)' → accordion di bawahnya
+2026-03-05 18:25:17,102 - INFO -   Subclass 190 → 3 accordion-item ditemukan
+2026-03-05 18:25:17,107 - INFO -   Parsing subclass 491...
+2026-03-05 18:25:17,108 - INFO -   Heading ditemukan: 'Subclass 491 - Tasmanian Skilled Employment (TSE)' → accordion di bawahnya
+2026-03-05 18:25:17,109 - INFO -   Subclass 491 → 3 accordion-item ditemukan
+2026-03-05 18:25:17,111 - INFO - 
+=== Pathway: TSG ===
+2026-03-05 18:25:17,112 - INFO - Fetching + manual click accordions: https://www.migration.tas.gov.au/skilled_migration/skilled-workers-and-graduates-living-in-Tasmania/tasmanian-skilled-graduate-pathways-tsg
+2026-03-05 18:25:20,568 - INFO -   Ditemukan 6 accordion button
+2026-03-05 18:25:25,502 - INFO -   Parsing subclass 190...
+2026-03-05 18:25:25,502 - INFO -   Heading ditemukan: 'Subclass 190 - Tasmanian Skilled Graduate (TSG)' → accordion di bawahnya
+2026-03-05 18:25:25,508 - INFO -   Subclass 190 → 3 accordion-item ditemukan
+2026-03-05 18:25:25,508 - INFO -   Parsing subclass 491...
+2026-03-05 18:25:25,511 - INFO -   Heading ditemukan: 'Subclass 491 - Tasmanian Skilled Graduate (TSG)' → accordion di bawahnya
+2026-03-05 18:25:25,512 - INFO -   Subclass 491 → 3 accordion-item ditemukan
+2026-03-05 18:25:25,515 - INFO - 
+=== Pathway: TER ===
+2026-03-05 18:25:25,515 - INFO - Fetching + manual click accordions: https://www.migration.tas.gov.au/skilled_migration/skilled-workers-and-graduates-living-in-Tasmania/tasmanian-established-resident-pathways-ter
+2026-03-05 18:25:28,651 - INFO -   Ditemukan 6 accordion button
+2026-03-05 18:25:33,602 - INFO -   Parsing subclass 190...
+2026-03-05 18:25:33,608 - INFO -   Heading ditemukan: 'Subclass 190 - Tasmanian Established Resident Pathways (TER)' → accordion di bawahnya
+2026-03-05 18:25:33,610 - INFO -   Subclass 190 → 3 accordion-item ditemukan
+2026-03-05 18:25:33,611 - INFO -   Parsing subclass 491...
+2026-03-05 18:25:33,613 - INFO -   Heading ditemukan: 'Subclass 491 - Tasmanian Established Resident Pathways (TER)' → accordion di bawahnya
+2026-03-05 18:25:33,613 - INFO -   Subclass 491 → 3 accordion-item ditemukan
+2026-03-05 18:25:33,616 - INFO - 
+=== Pathway: TBO ===
+2026-03-05 18:25:33,616 - INFO - Fetching + manual click accordions: https://www.migration.tas.gov.au/skilled_migration/skilled-workers-and-graduates-living-in-Tasmania/tasmanian-business-operator-pathway-tbo
+2026-03-05 18:25:36,953 - INFO -   Ditemukan 3 accordion button
+2026-03-05 18:25:40,273 - INFO -   Parsing subclass 190...
+2026-03-05 18:25:40,273 - INFO -   Tidak ada heading/accordion untuk subclass 190 di halaman ini
+2026-03-05 18:25:40,273 - INFO -   Parsing subclass 491...
+2026-03-05 18:25:40,273 - INFO -   Accordion-button ditemukan: '491 TBO - Minimum requirements' → gunakan accordion ini
+2026-03-05 18:25:40,273 - INFO -   Subclass 491 → 3 accordion-item ditemukan
+2026-03-05 18:25:40,308 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\tas\requirements_tas.xlsx
+2026-03-05 18:25:40,308 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\tas
+2026-03-05 18:25:40,312 - INFO - [TAS] Selesai dalam 32.0s — 2 baris
+2026-03-05 18:25:40,313 - INFO - 
+============================================================
+2026-03-05 18:25:40,313 - INFO -   Starting: VIC
+2026-03-05 18:25:40,313 - INFO - ============================================================
+2026-03-05 18:25:40,313 - INFO - === Scraping VIC: Subclass_190 ===
+2026-03-05 18:25:40,313 - INFO - Fetching (accordion click mode): https://liveinmelbourne.vic.gov.au/migrate/skilled-migration-visas/skilled-nominated-visa-subclass-190
+2026-03-05 18:25:48,189 - INFO - Found 9 accordion headers
+2026-03-05 18:25:48,219 - INFO - Clicking accordion [0]: Basic eligibility
+2026-03-05 18:25:48,916 - INFO - Clicking accordion [1]: Victorian subclass 190 skilled visa nomination
+2026-03-05 18:25:49,587 - INFO - Clicking accordion [2]: Further eligibility requirements
+2026-03-05 18:25:50,278 - INFO - Clicking accordion [3]: Invitation to apply for Victorian nomination
+2026-03-05 18:25:50,958 - INFO - Clicking accordion [4]: Submitting a nomination application
+2026-03-05 18:25:51,638 - INFO - Clicking accordion [5]: Nomination application assessment
+2026-03-05 18:25:52,320 - INFO - Clicking accordion [6]: Nomination application outcome
+2026-03-05 18:25:53,011 - INFO - Clicking accordion [7]: Your nomination obligations
+2026-03-05 18:25:53,688 - INFO - Clicking accordion [8]: Terms and Conditions
+2026-03-05 18:25:56,069 - INFO - === Scraping VIC: Subclass_491 ===
+2026-03-05 18:25:56,069 - INFO - Fetching (accordion click mode): https://liveinmelbourne.vic.gov.au/migrate/skilled-migration-visas/491
+2026-03-05 18:26:03,467 - INFO - Found 9 accordion headers
+2026-03-05 18:26:03,498 - INFO - Clicking accordion [0]: Basic eligibility
+2026-03-05 18:26:04,199 - INFO - Clicking accordion [1]: Victorian subclass 491 skilled work regional visa nomination
+2026-03-05 18:26:04,935 - INFO - Clicking accordion [2]: Further eligibility requirements
+2026-03-05 18:26:05,610 - INFO - Clicking accordion [3]: Invitation to apply for Victorian nomination
+2026-03-05 18:26:06,294 - INFO - Clicking accordion [4]: Submitting a nomination application
+2026-03-05 18:26:06,973 - INFO - Clicking accordion [5]: Nomination application assessment
+2026-03-05 18:26:07,662 - INFO - Clicking accordion [6]: Nomination application outcome
+2026-03-05 18:26:08,343 - INFO - Clicking accordion [7]: Your nomination obligations
+2026-03-05 18:26:09,023 - INFO - Clicking accordion [8]: Terms and Conditions
+2026-03-05 18:26:11,419 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\vic\requirements_vic.xlsx
+2026-03-05 18:26:11,419 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\vic
+2026-03-05 18:26:11,423 - INFO - [VIC] Selesai dalam 31.1s — 2 baris
+2026-03-05 18:26:11,423 - INFO - 
+============================================================
+2026-03-05 18:26:11,423 - INFO -   Starting: WA
+2026-03-05 18:26:11,423 - INFO - ============================================================
+2026-03-05 18:26:11,423 - INFO - === Scraping WA Requirements ===
+2026-03-05 18:26:11,423 - INFO - Fetching: https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-nominated-190/points-table
+2026-03-05 18:26:15,810 - INFO - [Camoufox] Membuka: https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-nominated-190/points-table
+2026-03-05 18:26:17,690 - INFO - [Camoufox] Selector 'ha-wysiwyg' ditemukan.
+2026-03-05 18:26:22,738 - INFO - [Camoufox] HTML didapat (1,327,758 chars)
+2026-03-05 18:26:23,188 - INFO - [DEBUG] HTML disimpan → c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\debug_points-table.html
+2026-03-05 18:26:23,232 - INFO - Fetching: https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-work-regional-provisional-491
+2026-03-05 18:26:27,702 - INFO - [Camoufox] Membuka: https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-work-regional-provisional-491
+2026-03-05 18:26:29,997 - INFO - [Camoufox] Selector 'ha-visa-card' ditemukan.
+2026-03-05 18:26:35,045 - INFO - [Camoufox] HTML didapat (1,287,193 chars)
+2026-03-05 18:26:35,488 - INFO - [DEBUG] HTML disimpan → c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\debug_skilled-work-regional-provisional-491.html
+2026-03-05 18:26:35,538 - INFO - [Excel] Formatting selesai: c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\wa\requirements_wa.xlsx
+2026-03-05 18:26:35,538 - INFO - Scraping selesai. Data disimpan ke c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\wa
+2026-03-05 18:26:35,538 - INFO - [WA] Selesai dalam 24.1s — 2 baris
+2026-03-05 18:26:35,607 - INFO - [Combined] XLSX (8 sheets) → c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\combined\requirements_all_states.xlsx
+2026-03-05 18:26:35,612 - INFO - [Combined] CSV  → c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\combined\requirements_all_states.csv
+2026-03-05 18:26:35,612 - INFO - [Combined] JSON → c:\Users\User\Documents\Interlace\WebScraping\base-repo\state_nomination_scrap\src\scrapers\output_scrape\combined\requirements_all_states.json
+2026-03-05 18:26:35,612 - INFO - [Combined] 23 total baris dari 8 state
+2026-03-05 18:26:35,612 - INFO - 
+============================================================
+2026-03-05 18:26:35,615 - INFO -   SELESAI — 8/8 states OK
+2026-03-05 18:26:35,615 - INFO -   Total waktu: 285.0s (4.8 menit)
+2026-03-05 18:26:35,615 - INFO -   Status per state:
+2026-03-05 18:26:35,615 - INFO -     ACT   : OK (2 baris)
+2026-03-05 18:26:35,615 - INFO -     NT    : OK (2 baris)
+2026-03-05 18:26:35,615 - INFO -     NSW   : OK (2 baris)
+2026-03-05 18:26:35,615 - INFO -     QLD   : OK (7 baris)
+2026-03-05 18:26:35,615 - INFO -     SA    : OK (4 baris)
+2026-03-05 18:26:35,616 - INFO -     TAS   : OK (2 baris)
+2026-03-05 18:26:35,616 - INFO -     VIC   : OK (2 baris)
+2026-03-05 18:26:35,616 - INFO -     WA    : OK (2 baris)
+2026-03-05 18:26:35,616 - INFO - ============================================================
