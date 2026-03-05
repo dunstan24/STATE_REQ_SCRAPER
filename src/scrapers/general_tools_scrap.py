@@ -258,8 +258,15 @@ def export_dataframe(df, output_dir, filename_prefix, preview_columns=None):
     df.to_json(json_path, orient="records", indent=4)
 
     # Export Excel dengan formatting rapi
-    df.to_excel(xlsx_path, index=False, engine="openpyxl")
-    format_excel(xlsx_path)
+    try:
+        df.to_excel(xlsx_path, index=False, engine="openpyxl")
+        format_excel(xlsx_path)
+    except PermissionError:
+        logger.warning(
+            f"[Excel] Gagal menulis '{xlsx_path}' — file mungkin sedang dibuka "
+            f"di Excel. Tutup file tersebut lalu jalankan ulang. "
+            f"CSV dan JSON tetap tersimpan."
+        )
 
     logger.info(f"Scraping selesai. Data disimpan ke {output_dir}")
     print("\n--- Preview DataFrame ---")
