@@ -3,9 +3,8 @@ import os
 import pandas as pd
 from bs4 import BeautifulSoup
 
-import sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from playwright_helper import get_page_source_playwright
+from general_tools_scrap import get_clean_text, export_dataframe
 
 # ==========================
 # LINKS
@@ -30,26 +29,6 @@ def extract_service_fee_from_soup(soup):
         if any(kw in text for kw in keywords):
             fees.append(tag.get_text(strip=True))
     return fees
-
-
-def export_dataframe(df, output_dir, filename_prefix, preview_columns=None):
-    os.makedirs(output_dir, exist_ok=True)
-
-    csv_path   = os.path.join(output_dir, f"{filename_prefix}.csv")
-    json_path  = os.path.join(output_dir, f"{filename_prefix}.json")
-    excel_path = os.path.join(output_dir, f"{filename_prefix}.xlsx")
-
-    df.to_csv(csv_path, index=False, encoding="utf-8")
-    df.to_json(json_path, orient="records", force_ascii=False, indent=2)
-    df.to_excel(excel_path, index=False)
-
-    logger.info(f"Exported CSV   → {csv_path}")
-    logger.info(f"Exported JSON  → {json_path}")
-    logger.info(f"Exported Excel → {excel_path}")
-
-    if preview_columns:
-        logger.info("\n--- Preview ---")
-        logger.info(df[preview_columns].to_string(index=False))
 
 
 # ── 190 parser ─────────────────────────────────────────────────────────────────

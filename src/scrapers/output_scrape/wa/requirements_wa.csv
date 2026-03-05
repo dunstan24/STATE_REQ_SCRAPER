@@ -1,4 +1,4 @@
-state code,state stream,requirements,service fee
+﻿state code,state stream,requirements,service fee
 WA,WA_190,"OVERVIEW
 
 Under the SkillSelect model, the Department of Home Affairs invite skilled workers to apply for a Skilled Nominated visa (subclass 190) based on the claims presented in their expression of interest (EOI) in SkillSelect.
@@ -6,98 +6,98 @@ The applicant must satisfy most criteria specified in the points test at the tim
 
 AGE
 
-[Age] = at least 18 but less than 25 years   [Points] = 25
-[Age] = at least  25 but less than 33 years   [Points] = 30
-[Age] = at least  33 but less than 40 years   [Points] = 25
-[Age] = at least  40 but less than 45 years   [Points] = 15
+[Age] = at least 18 but less than 25 years [Points] = 25
+[Age] = at least 25 but less than 33 years [Points] = 30
+[Age] = at least 33 but less than 40 years [Points] = 25
+[Age] = at least 40 but less than 45 years [Points] = 15
 
 ENGLISH LANGUAGE SKILLS
 
-[English] = Competent English   [Points] = 0
-[English] = Proficient English   [Points] = 10
-[English] = Superior English   [Points] = 20
+[English] = Competent English [Points] = 0
+[English] = Proficient English [Points] = 10
+[English] = Superior English [Points] = 20
 English language skills
 
 SKILLED EMPLOYMENT EXPERIENCE
 
 
-OVERSEAS SKILLED EMPLOYMENT – (OUTSIDE AUSTRALIA)
+OVERSEAS SKILLED EMPLOYMENT - (OUTSIDE AUSTRALIA)
 
-[Number of years] = Less than 3 years   [Points] = 0
-[Number of years] = At least 3 but less than 5 years   [Points] = 5
-[Number of years] = At least 5 but less than 8 years   [Points] = 10
-[Number of years] = At least 8 years   [Points] = 15
+[Number of years] = Less than 3 years [Points] = 0
+[Number of years] = At least 3 but less than 5 years [Points] = 5
+[Number of years] = At least 5 but less than 8 years [Points] = 10
+[Number of years] = At least 8 years [Points] = 15
 
-AUSTRALIAN SKILLED EMPLOYMENT – (IN AUSTRALIA)
+AUSTRALIAN SKILLED EMPLOYMENT - (IN AUSTRALIA)
 
-[Number of years] = Less than 1 year   [Points] = 0
-[Number of years] = At least 1 but less than 3 years   [Points] = 5
-[Number of years] = At least 3 but less than 5 years   [Points] = 10
-[Number of years] = At least 5 but less than 8 years   [Points] = 15
-[Number of years] = At least 8 years   [Points] = 20
+[Number of years] = Less than 1 year [Points] = 0
+[Number of years] = At least 1 but less than 3 years [Points] = 5
+[Number of years] = At least 3 but less than 5 years [Points] = 10
+[Number of years] = At least 5 but less than 8 years [Points] = 15
+[Number of years] = At least 8 years [Points] = 20
 Employed means engaged in an occupation for remuneration for at least 20 hours a week.
 Closely-related occupations must be:
 Under the points test there is a cap on the number of points that can be awarded for employment experience. The maximum number of points that can be awarded is 20, this means that even if you score more than 20 combined points for your employment experience only 20 points will be awarded.
 
 EDUCATIONAL QUALIFICATIONS
 
-[Requirement] = A Doctorate from an Australian educational institution or a Doctorate from another educational institution, that is of a recognised standard .   [Points] = 20
-[Requirement] = At least a Bachelor degree from an Australian educational institution or at least a Bachelor qualification, from another educational institution, that is of a recognised standard .   [Points] = 15
-[Requirement] = A diploma or trade qualification from an Australian educational institution.   [Points] = 10
-[Requirement] = Attained a qualification or award recognised by the relevant assessing authority for your nominated skilled occupation as being suitable for that occupation   [Points] = 10
+[Requirement] = A Doctorate from an Australian educational institution or a Doctorate from another educational institution, that is of a recognised standard . [Points] = 20
+[Requirement] = At least a Bachelor degree from an Australian educational institution or at least a Bachelor qualification, from another educational institution, that is of a recognised standard . [Points] = 15
+[Requirement] = A diploma or trade qualification from an Australian educational institution. [Points] = 10
+[Requirement] = Attained a qualification or award recognised by the relevant assessing authority for your nominated skilled occupation as being suitable for that occupation [Points] = 10
 For points based migration you will receive points for your highest qualification only.
 
 RECOGNITION OF YOUR QUALIFICATIONS
 
-The authority undertaking your skills assessment may determine if your qualifications are comparable to the relevant Australian qualification. Assessing authorities are listed against your occupation in the relevant list of eligible skilled occupations . You must have obtained this recognition at the time you are invited to apply for a visa.
+The authority undertaking your skills assessment may determine if your qualifications are comparable to the relevant Australian qualification. Assessing authorities are listed against your occupation in the relevant list of eligible skilled occupations . You must have obtained this recognition at the time you are invited to apply for a visa.
 If you hold an overseas qualification at bachelor level or above and your skills assessing authority did not offer an opinion on that qualification then it is open to you to contact Vocational Education Training and Assessment Services (VETASSESS) for advice.
 VETASSESS can provide an assessment of the comparative educational level of these qualifications against the Australian Qualifications Framework (AQF). Advice from VETASSESS should be provided with your application to support your claim for these points.
-To obtain an assessment  contact Vocational Education Training and Assessment Services .
+To obtain an assessment contact Vocational Education Training and Assessment Services .
 
 DOCTORAL REQUIREMENTS (PHD)
 
-You can only be awarded points for a doctoral degree if you have completed a qualification at the relevant level, that is,  a Doctor of Philosophy (PhD). You cannot claim these points for the award of other qualifications that give you the right to use to the title of Doctor (that is, general practitioner, dentist, vet).
+You can only be awarded points for a doctoral degree if you have completed a qualification at the relevant level, that is, a Doctor of Philosophy (PhD). You cannot claim these points for the award of other qualifications that give you the right to use to the title of Doctor (that is, general practitioner, dentist, vet).
 
 SPECIALIST EDUCATION QUALIFICATION
 
-[Requirement] = A Masters degree by research or a Doctorate degree from an Australian educational institution that included at least 2 academic years study in a relevant field.   [Points] = 10
+[Requirement] = A Masters degree by research or a Doctorate degree from an Australian educational institution that included at least 2 academic years study in a relevant field. [Points] = 10
 The postgraduate degree by research (doctorate or masters) must be awarded from an Australian education institution after at least two academic years of study in the following science, technology, engineering, mathematics or specified information and communication technology (ICT) fields:
 Natural and physical sciences
 Information technology
-Engineering and related technologies
+Engineering and related technologies
 To determine whether your qualification is eligible, see the CRICOS website.
 
 AUSTRALIAN STUDY REQUIREMENT
 
-[Requirement] = Meet the Australian study requirement   [Points] = 5
+[Requirement] = Meet the Australian study requirement [Points] = 5
 You must have at least 1 degree, diploma or trade qualification from an Australian educational institution that meets the Australian study requirement.
 
 PROFESSIONAL YEAR IN AUSTRALIA
 
-[Requirement] = Completion of a Professional Year in Australia   [Points] = 5
+[Requirement] = Completion of a Professional Year in Australia [Points] = 5
 At the time of invitation to apply, you had completed a Professional Year. To be eligible for the award of these points your Professional Year must have been in Accounting, ICT/Computing or Engineering, and:
-* Where a Professional Year program was completed, meaning finished, within the 48 month period prior to the time of invitation, you may be awarded 5 points. To avoid any doubt, you could have commenced the Professional Year at a time before the 48 months prior to invitation. The time you “completed” a Professional Year is the date listed on your official Record of Completion which is issued by the authorised body or Professional Year program delivery partner.
+* Where a Professional Year program was completed, meaning finished, within the 48 month period prior to the time of invitation, you may be awarded 5 points. To avoid any doubt, you could have commenced the Professional Year at a time before the 48 months prior to invitation. The time you ""completed"" a Professional Year is the date listed on your official Record of Completion which is issued by the authorised body or Professional Year program delivery partner.
 
 CREDENTIALLED COMMUNITY LANGUAGE
 
-[Requirement] = Hold a recognised qualification in a credentialled community language   [Points] = 5
+[Requirement] = Hold a recognised qualification in a credentialled community language [Points] = 5
 To be credentialled in a community language and eligible for the award of points you must have been accredited at the paraprofessional level or above, certified at the certified provisional level or above, or have a community language credential for interpreting or translating by the National Accreditation Authority for Translators and Interpreters .
 
 STUDY IN REGIONAL AUSTRALIA
 
-[Requirement] = You must have at least 1 degree, diploma or trade qualification from an Australian educational institution that satisfies the Australian study requirement obtained while living and studying in an eligible area of regional Australia   [Points] = 5
+[Requirement] = You must have at least 1 degree, diploma or trade qualification from an Australian educational institution that satisfies the Australian study requirement obtained while living and studying in an eligible area of regional Australia [Points] = 5
 To be eligible for the award of points your educational qualification:
 
 PARTNER SKILLS
 
-[Requirement] = Your spouse or de facto partner must also be an applicant for this visa and meet age, English and skill criteria For you to be eligible for the award of these points your partner must be an applicant for the same visa subclass and must not be an Australian permanent resident or an Australian citizen.  Additionally, you will need to provide evidence that when you were invited to apply for this visa that they: were under 45 years old had competent English had nominated a skilled occupation that is on the same skilled occupation list as your nominated skilled occupation had a suitable skills assessment from the relevant assessing authority for their nominated skilled occupation, and the assessment wasn’t for a Subclass 485 visa.   [Points] = 10
-[Requirement] = Your spouse or de facto partner must also be an applicant for this visa and has competent English For you to be eligible for the award of these points your partner must be an applicant for the same visa subclass and must not be an Australian permanent resident or an Australian citizen.   [Points] = 5
-[Requirement] = You are single or your partner is an Australian citizen or permanent resident*   [Points] = 10
+[Requirement] = Your spouse or de facto partner must also be an applicant for this visa and meet age, English and skill criteria For you to be eligible for the award of these points your partner must be an applicant for the same visa subclass and must not be an Australian permanent resident or an Australian citizen. Additionally, you will need to provide evidence that when you were invited to apply for this visa that they: were under 45 years old had competent English had nominated a skilled occupation that is on the same skilled occupation list as your nominated skilled occupation had a suitable skills assessment from the relevant assessing authority for their nominated skilled occupation, and the assessment wasn't for a Subclass 485 visa. [Points] = 10
+[Requirement] = Your spouse or de facto partner must also be an applicant for this visa and has competent English For you to be eligible for the award of these points your partner must be an applicant for the same visa subclass and must not be an Australian permanent resident or an Australian citizen. [Points] = 5
+[Requirement] = You are single or your partner is an Australian citizen or permanent resident* [Points] = 10
 *If your marital status changes during the processing of your visa, we may not award you points for this item. We do not assess this item as at the time of invitation.
 
 NOMINATION
 
-[Requirement] = You were invited to apply for a Subclass 190 (Skilled — Nominated) visa and the nominating State or Territory government agency has not withdrawn the nomination   [Points] = 5
+[Requirement] = You were invited to apply for a Subclass 190 (Skilled - Nominated) visa and the nominating State or Territory government agency has not withdrawn the nomination [Points] = 5
 You must be nominated to be invited to apply for this visa. Provided your nomination remains in effect, you may be eligible for the award of these points.",-
 WA,WA_491,"SKILLED WORK REGIONAL (PROVISIONAL) VISA - MAIN APPLICANT
 
@@ -106,6 +106,6 @@ WA,WA_491,"SKILLED WORK REGIONAL (PROVISIONAL) VISA - MAIN APPLICANT
 • travel to and from Australia as many times as you want, while the visa is valid​
 • apply for permanent residence after 3 years from the time your visa is granted​.​
 
-SKILLED WORK REGIONAL (PROVISIONAL) VISA – SUBSEQUENT ENTRANT
+SKILLED WORK REGIONAL (PROVISIONAL) VISA - SUBSEQUENT ENTRANT
 
 • ​be a member of the family unit of a person who holds a subclass 491 visa on the basis of satisfying the primary criteria for the grant of that visa.",-
