@@ -1,8 +1,39 @@
+""" SA State Visa Requirements Scraper
+
+Alur kerja Function:
+
+__main__
+  ├── scrape_sa_pathway("Skilled_Employment_in_South_Australia", url)
+  │     ├── fetch_and_parse(url)                       → BeautifulSoup soup
+  │     ├── extract_detail_requirements(soup, url)     → teks requirements
+  │     └── extract_service_fee(soup)                  → list nilai $xxx
+  │
+  ├── scrape_sa_pathway("South_Australian_Graduates", url)
+  ├── scrape_sa_pathway("Outer_Regional_Skilled_Employment", url)
+  │
+  ├── scrape_sa_offshore(url)                          → 1 baris (Playwright tab-click)
+  │     ├── Playwright click each tab button
+  │     ├── extract content per tab
+  │     └── extract_service_fee(soup)
+  │
+  ├── pd.concat([...])                                 → gabung jadi 1 DataFrame (4 baris)
+  │
+  └── export_dataframe(final_df, ...)                  → CSV + JSON + formatted XLSX
+"""
+
 import logging
 import os
 import re
+
 import pandas as pd
 from bs4 import BeautifulSoup
+from playwright_helper import get_page_source_playwright
+from general_tools_scrap import (
+    get_clean_text,
+    extract_service_fee,
+    export_dataframe,
+)
+
 
 # ==========================
 # LINK SA
@@ -13,191 +44,204 @@ URL_SA_OUTER = "https://migration.sa.gov.au/before-applying/visa-options-and-pat
 URL_SA_OFFSHORE = "https://migration.sa.gov.au/before-applying/visa-options-and-pathways/skilled-migrants/moving-to-south-australia-from-overseas"
 # ==========================
 
+# Output path relative to this script location
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _OUTPUT_DIR = os.path.join(_SCRIPT_DIR, "output_scrape", "sa")
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 
-def extract_service_fee_from_soup(soup):
-
-    fees = []
-
-    for li in soup.find_all("li"):
-        text = li.get_text(" ", strip=True).lower()
-
-        if "service fee" in text or "application fee" in text:
-
-            found = re.findall(r"\$[\d,]+(?:\.\d{2})?", text)
-
-            if found:
-                fees.extend(found)
-
-    return fees
+# ── Fetch ─────────────────────────────────────────────────────────────────────
 
 
-def get_clean_text(soup, url=None):
+def fetch_and_parse(url):
+    """Fetch HTML dan return BeautifulSoup soup.
+
+    Parameters
+    ----------
+    url : str — URL halaman SA
     """
-    Extract SA requirements using correct structure.
-    Different logic based on URL:
-    - URL_SA_OUTER:    Find h2 "Eligibility guidelines", grab all li from subsequent t-copy sections
-    - URL_SA_OFFSHORE: Find ALL h2 headings, grab all li from each subsequent t-copy section
-    - Others:          Standard parsing (h2 + t-copy in same section)
-    """
+    logger.info(f"Fetching: {url}")
+    html = get_page_source_playwright(
+        url=url,
+        wait_for_selector="body",
+        extra_wait_seconds=3,
+        bypass_cf=False,
+    )
+    if not html:
+        logger.error("Gagal mendapatkan HTML.")
+        return None
 
+    return BeautifulSoup(html, "lxml")
+
+
+# ── Parsing Helpers ───────────────────────────────────────────────────────────
+
+
+_SKIP_KEYWORDS = [
+    "NOMINATION PROCESS",
+    "SKILLED MIGRANTS",
+    "GRADUATES WHO ACHIEVE",
+    "INVITATIONS TO APPLY",
+]
+
+
+def _extract_standard(soup):
+    """Ekstrak requirements dari halaman Employment dan Graduates.
+
+    Struktur HTML:  div.col-span-full > h2.t-heading + div.t-copy > li
+    """
     lines = []
-
-    skip_keywords = ["NOMINATION PROCESS", "SKILLED MIGRANTS", "GRADUATES WHO ACHIEVE", "INVITATIONS TO APPLY"]
-
-    # ------------------------------------------------------------------ #
-    # Special logic for Outer Regional (link 3)
-    # ------------------------------------------------------------------ #
-    if url and URL_SA_OUTER in url:
-        all_h2 = soup.find_all("h2", class_="t-heading")
-        target_heading = None
-
-        for h2 in all_h2:
-            if "Eligibility guidelines" in h2.get_text(strip=True):
-                target_heading = h2
-                break
-
-        if target_heading:
-            title = target_heading.get_text(strip=True)
-            lines.append(f"\n{title.upper()}")
-
-            parent_container = target_heading.find_parent("div", class_="l-grid-contained")
-
-            if parent_container:
-                next_container = parent_container.find_next_sibling("div", class_="l-grid-contained")
-
-                if next_container:
-                    t_copy_list = next_container.find_all("div", class_="t-copy")
-                    for t_copy in t_copy_list:
-                        for ul in t_copy.find_all("ul"):
-                            for li in ul.find_all("li", recursive=False):
-                                text = li.get_text(" ", strip=True)
-                                if text:
-                                    lines.append(f"- {text}")
-
-        return "\n".join(lines).strip()
-
-    # ------------------------------------------------------------------ #
-    # Special logic for Offshore / Moving from Overseas (link 4)
-    #
-    # Page structure:
-    #   LEFT  — heading buttons: div[data-tab-btn][id="N"]
-    #                              > button > div > span.z-10  (heading text)
-    #   RIGHT — content panels:  div[id="N"] containing div.t-copy
-    #                             (hidden until heading is clicked;
-    #                              visibility toggled via "parent-is-selected"
-    #                              CSS class — Playwright must click each btn)
-    #
-    # Because content panels share the same numeric id as their heading
-    # button we match them by id after clicking each button.
-    # NOTE: soup must have been built AFTER clicking (see scrape_offshore).
-    # ------------------------------------------------------------------ #
-    if url and URL_SA_OFFSHORE in url:
-        # All heading buttons, ordered by their numeric id
-        heading_divs = soup.find_all("div", attrs={"data-tab-btn": True})
-
-        for heading_div in heading_divs:
-            tab_id = heading_div.get("id")  # "0", "1", "2", ...
-
-            # Extract heading text from <span class="z-10">
-            span = heading_div.find("span", class_="z-10")
-            if not span:
-                continue
-            heading_text = span.get_text(strip=True)
-            if not heading_text:
-                continue
-
-            lines.append(f"\n{heading_text.upper()}")
-
-            # Find the matching content panel by id (same numeric id,
-            # but this div does NOT have data-tab-btn — distinguish by
-            # checking for t-copy inside)
-            # There may be multiple divs with the same id; we want the
-            # one that contains a t-copy (the content panel).
-            content_candidates = soup.find_all("div", id=tab_id)
-            for candidate in content_candidates:
-                # Skip the heading button div itself
-                if candidate.has_attr("data-tab-btn"):
-                    continue
-
-                t_copy_list = candidate.find_all("div", class_="t-copy")
-                for t_copy in t_copy_list:
-                    # Paragraph context lines
-                    for p in t_copy.find_all("p"):
-                        text = p.get_text(" ", strip=True)
-                        if text:
-                            lines.append(f"  {text}")
-
-                    # Bullet-point requirements
-                    for ul in t_copy.find_all("ul"):
-                        for li in ul.find_all("li", recursive=False):
-                            text = li.get_text(" ", strip=True)
-                            if text:
-                                lines.append(f"- {text}")
-
-        return "\n".join(lines).strip()
-
-    # ------------------------------------------------------------------ #
-    # Standard logic for Employment and Graduates
-    # ------------------------------------------------------------------ #
     sections = soup.find_all("div", class_="col-span-full")
-
     current_heading = None
 
     for section in sections:
-
         title_tag = section.find("h2", class_="t-heading")
 
         if title_tag:
             title = title_tag.get_text(strip=True)
-
-            if any(skip in title.upper() for skip in skip_keywords):
+            if any(skip in title.upper() for skip in _SKIP_KEYWORDS):
                 continue
-
             current_heading = title
             lines.append(f"\n{title.upper()}")
 
         content = section.find("div", class_="t-copy")
-
         if content and current_heading:
             for li in content.find_all("li"):
                 text = li.get_text(" ", strip=True)
-
                 if text:
                     lines.append(f"- {text}")
 
     return "\n".join(lines).strip()
 
 
-def scrape_offshore():
+def _extract_outer_regional(soup):
+    """Ekstrak requirements dari halaman Outer Regional.
+
+    Struktur: h2 "Eligibility guidelines" → sibling l-grid-contained → t-copy > ul > li
     """
-    Offshore page uses a JS tab panel — content is only visible after
-    clicking each heading button.  We use Playwright directly to:
-      1. Load the page
-      2. Find all heading buttons: div[data-tab-btn] > button
-      3. Click each one, wait for CSS transition, snapshot DOM
-      4. Extract heading text + matching content panel by numeric id
+    lines = []
+    all_h2 = soup.find_all("h2", class_="t-heading")
+    target_heading = None
+
+    for h2 in all_h2:
+        if "Eligibility guidelines" in h2.get_text(strip=True):
+            target_heading = h2
+            break
+
+    if target_heading:
+        title = target_heading.get_text(strip=True)
+        lines.append(f"\n{title.upper()}")
+
+        parent_container = target_heading.find_parent("div", class_="l-grid-contained")
+        if parent_container:
+            next_container = parent_container.find_next_sibling(
+                "div", class_="l-grid-contained"
+            )
+            if next_container:
+                t_copy_list = next_container.find_all("div", class_="t-copy")
+                for t_copy in t_copy_list:
+                    for ul in t_copy.find_all("ul"):
+                        for li in ul.find_all("li", recursive=False):
+                            text = li.get_text(" ", strip=True)
+                            if text:
+                                lines.append(f"- {text}")
+
+    return "\n".join(lines).strip()
+
+
+def extract_detail_requirements(soup, url):
+    """Ekstrak detail requirements berdasarkan URL halaman SA.
+
+    Parameters
+    ----------
+    soup : BeautifulSoup — full page soup
+    url  : str — URL halaman, menentukan logika parsing yang digunakan
+
+    Returns
+    -------
+    str — teks requirements multi-line
     """
-    logger.info(f"Fetching offshore (tab-click mode): {URL_SA_OFFSHORE}")
+    if not soup:
+        return ""
+
+    if URL_SA_OUTER in url:
+        return _extract_outer_regional(soup)
+
+    # Standard: Employment & Graduates
+    return _extract_standard(soup)
+
+
+# ── Scraper Utama ─────────────────────────────────────────────────────────────
+
+
+def scrape_sa_pathway(stream_name, url):
+    """Scrape SA visa requirements untuk satu pathway (non-offshore).
+
+    Parameters
+    ----------
+    stream_name : str — nama pathway (misal: "Skilled_Employment_in_South_Australia")
+    url         : str — URL halaman SA
+
+    Returns
+    -------
+    pd.DataFrame — 1 baris dengan kolom:
+        state code, state stream, Detail Requirements, service fee
+    """
+    logger.info(f"=== Scraping SA: {stream_name} ===")
+    soup = fetch_and_parse(url)
+    if not soup:
+        return pd.DataFrame()
+
+    text_detail = extract_detail_requirements(soup, url)
+
+    fees = extract_service_fee(soup, keywords=["service fee", "application fee"])
+    service_fee_val = ", ".join(sorted(set(fees))) if fees else "-"
+
+    data = {
+        "state code": "SA",
+        "state stream": stream_name,
+        "Detail Requirements": text_detail,
+        "service fee": service_fee_val,
+    }
+
+    return pd.DataFrame([data])
+
+
+def scrape_sa_offshore(url):
+    """Scrape halaman SA offshore (tab-click mode via Playwright).
+
+    Offshore page menggunakan JS tab panel — konten hanya terlihat setelah
+    mengklik setiap heading button. Menggunakan Playwright untuk:
+      1. Load page
+      2. Klik setiap tab button: div[data-tab-btn] > button
+      3. Snapshot DOM setelah klik
+      4. Ekstrak heading + konten dari panel yang aktif
+
+    Returns
+    -------
+    pd.DataFrame — 1 baris dengan kolom:
+        state code, state stream, Detail Requirements, service fee
+    """
+    logger.info(f"=== Scraping SA: Moving_to_South_Australia_from_Overseas ===")
+    logger.info(f"Fetching offshore (tab-click mode): {url}")
 
     try:
         from playwright.sync_api import sync_playwright
     except ImportError:
         logger.error("playwright tidak terinstall.")
-        return "", []
+        return pd.DataFrame()
 
     all_lines = []
-    fees = []
+    all_fees = []
 
     with sync_playwright() as pw:
         browser = pw.chromium.launch(headless=True)
         page = browser.new_page()
-        page.goto(URL_SA_OFFSHORE, wait_until="networkidle", timeout=30000)
+        page.goto(url, wait_until="networkidle", timeout=30000)
         page.wait_for_timeout(3000)
 
         # Collect all heading buttons in DOM order
@@ -214,17 +258,21 @@ def scrape_offshore():
 
             # Click to activate the tab panel
             btn.click()
-            page.wait_for_timeout(600)  # buffer for 300ms CSS transition
+            page.wait_for_timeout(600)
 
             # Get numeric id from the parent div[data-tab-btn]
-            tab_id = btn.evaluate("el => el.closest('[data-tab-btn]').getAttribute('id')")
+            tab_id = btn.evaluate(
+                "el => el.closest('[data-tab-btn]').getAttribute('id')"
+            )
 
             # Snapshot DOM after click
             html = page.content()
             soup = BeautifulSoup(html, "lxml")
 
-            # Collect any fees visible in this panel state
-            fees.extend(extract_service_fee_from_soup(soup))
+            # Collect fees from this panel state
+            all_fees.extend(
+                extract_service_fee(soup, keywords=["service fee", "application fee"])
+            )
 
             all_lines.append(f"\n{heading_text.upper()}")
 
@@ -245,141 +293,62 @@ def scrape_offshore():
 
         browser.close()
 
-    return "\n".join(all_lines).strip(), list(set(fees))
-
-
-def fetch_and_parse(url):
-
-    logger.info(f"Fetching: {url}")
-
-    try:
-        try:
-            from playwright_helper import get_page_source_playwright
-        except ImportError:
-            from src.scrapers.playwright_helper import get_page_source_playwright
-
-        html = get_page_source_playwright(
-            url=url,
-            wait_for_selector="body",
-            extra_wait_seconds=3,
-            bypass_cf=False,
-        )
-
-    except ImportError:
-        logger.error("playwright_helper tidak ditemukan.")
-        return None
-
-    if not html:
-        logger.error("HTML tidak didapat.")
-        return None
-
-    return BeautifulSoup(html, "lxml")
-
-
-def scrape_page(url):
-
-    soup = fetch_and_parse(url)
-
-    if not soup:
-        return "", []
-
-    text = get_clean_text(soup, url)
-
-    fees = extract_service_fee_from_soup(soup)
-
-    return text, fees
-
-
-def scrape_sa(url=None):
-
-    logger.info("=== Scraping SA Requirements ===")
-
-    employment_text, employment_fees = scrape_page(URL_SA_EMPLOYMENT)
-    graduates_text, graduates_fees = scrape_page(URL_SA_GRADUATES)
-    outer_text, outer_fees = scrape_page(URL_SA_OUTER)
-    offshore_text, offshore_fees = scrape_offshore()  # ← uses Playwright tab-click
-
-    # Combine all fees across all four streams
-    all_fees = (
-        (employment_fees or [])
-        + (graduates_fees or [])
-        + (outer_fees or [])
-        + (offshore_fees or [])   # ← NEW
-    )
+    text_detail = "\n".join(all_lines).strip()
     service_fee_val = ", ".join(sorted(set(all_fees))) if all_fees else "-"
 
-    data = [
-        {
-            "state code": "SA",
-            "state stream": "Skilled_Employment_in_South_Australia",
-            "requirements": employment_text,
-            "service fee": service_fee_val,
-        },
-        {
-            "state code": "SA",
-            "state stream": "South_Australian_Graduates",
-            "requirements": graduates_text,
-            "service fee": service_fee_val,
-        },
-        {
-            "state code": "SA",
-            "state stream": "Outer_Regional_Skilled_Employment",
-            "requirements": outer_text,
-            "service fee": service_fee_val,
-        },
-        {
-            "state code": "SA",
-            "state stream": "Moving_to_South_Australia_from_Overseas",  # ← NEW
-            "requirements": offshore_text,
-            "service fee": service_fee_val,
-        },
-    ]
+    data = {
+        "state code": "SA",
+        "state stream": "Moving_to_South_Australia_from_Overseas",
+        "Detail Requirements": text_detail,
+        "service fee": service_fee_val,
+    }
 
-    return pd.DataFrame(data)
+    return pd.DataFrame([data])
+
+
+# ── Export ────────────────────────────────────────────────────────────────────
 
 
 def export_results(df):
-
-    if df is None or df.empty:
-
-        logger.error("Data kosong.")
-        return
-
-    os.makedirs(_OUTPUT_DIR, exist_ok=True)
-
-    json_path = os.path.join(_OUTPUT_DIR, "requirements_sa.json")
-
-    df.to_json(
-        json_path,
-        orient="records",
-        indent=4,
-        force_ascii=False
+    """Export hasil scraping SA ke CSV, JSON, dan formatted XLSX."""
+    export_dataframe(
+        df,
+        output_dir=_OUTPUT_DIR,
+        filename_prefix="requirements_sa",
+        preview_columns=["state code", "state stream", "service fee"],
     )
 
-    csv_path = os.path.join(_OUTPUT_DIR, "requirements_sa.csv")
-    try:
-        df.to_csv(csv_path, index=False, encoding="utf-8-sig")
-    except PermissionError:
-        logger.warning(f"Tidak dapat menulis {csv_path} (PermissionError). Menulis ke {csv_path}.tmp sebagai fallback.")
-        try:
-            df.to_csv(csv_path + ".tmp", index=False, encoding="utf-8-sig")
-        except Exception as e:
-            logger.error(f"Gagal menulis CSV fallback: {e}")
 
-    try:
-        df.to_excel(os.path.join(_OUTPUT_DIR, "requirements_sa.xlsx"), index=False)
-    except PermissionError:
-        logger.warning("Tidak dapat menulis Excel output (PermissionError), melewatkan penulisan xlsx.")
-    except Exception as e:
-        logger.error(f"Gagal menulis Excel: {e}")
-
-    logger.info(f"Scraping selesai. File JSON disimpan di: {json_path}")
-
-    print("\nPreview Data:")
-    print(df[["state code", "state stream", "service fee"]])
-
+# ── Main ──────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
 
-    final_df = scrape_sa()
+    # ── Pathway 1: Skilled Employment in South Australia ──────────────────
+    df_employment = scrape_sa_pathway(
+        stream_name="Skilled_Employment_in_South_Australia",
+        url=URL_SA_EMPLOYMENT,
+    )
+
+    # ── Pathway 2: South Australian Graduates ─────────────────────────────
+    df_graduates = scrape_sa_pathway(
+        stream_name="South_Australian_Graduates",
+        url=URL_SA_GRADUATES,
+    )
+
+    # ── Pathway 3: Outer Regional Skilled Employment ──────────────────────
+    df_outer = scrape_sa_pathway(
+        stream_name="Outer_Regional_Skilled_Employment",
+        url=URL_SA_OUTER,
+    )
+
+    # ── Pathway 4: Moving to South Australia from Overseas (tab-click) ────
+    df_offshore = scrape_sa_offshore(
+        url=URL_SA_OFFSHORE,
+    )
+
+    # Gabungkan & export
+    final_df = pd.concat(
+        [df_employment, df_graduates, df_outer, df_offshore],
+        ignore_index=True,
+    )
     export_results(final_df)
