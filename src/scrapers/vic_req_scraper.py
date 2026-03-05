@@ -20,6 +20,7 @@ import os
 import pandas as pd
 from bs4 import BeautifulSoup
 from general_tools_scrap import (
+    get_clean_text,
     extract_service_fee,
     export_dataframe,
 )
@@ -208,7 +209,14 @@ def scrape_vic_subclass(stream_name, url):
     return pd.DataFrame([data])
 
 
-# ── Export ────────────────────────────────────────────────────────────────────
+def scrape_vic():
+    """Scrape semua VIC requirements dan return combined DataFrame."""
+    df_190 = scrape_vic_subclass("Subclass_190", URL_VIC_190)
+    df_491 = scrape_vic_subclass("Subclass_491", URL_VIC_491)
+    return pd.concat([df_190, df_491], ignore_index=True)
+
+
+# ── Export ────────────────────────────────────────────────----------------------------------------------------------------
 
 
 def export_results(df):
@@ -227,7 +235,7 @@ if __name__ == "__main__":
 
     # ── Subclass 190: Skilled Nominated Visa ──────────────────────────────
     df_190 = scrape_vic_subclass(
-        stream_name="Subclass_90",
+        stream_name="Subclass_190",
         url=URL_VIC_190,
     )
 
