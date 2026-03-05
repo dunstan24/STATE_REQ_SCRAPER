@@ -74,20 +74,49 @@ def get_clean_text_190(soup):
         if not edit_div:
             continue
 
-        for tag in edit_div.find_all(["p", "li", "h3", "h4", "th", "td"]):
-            text = tag.get_text(strip=True)
+        for tag in edit_div.children:
+            if not hasattr(tag, "name") or not tag.name:
+                continue
+
+            # ── Table: parse row by row with [Header] = value format ──────
+            if tag.name == "table":
+                headers = []
+                for row in tag.find_all("tr"):
+                    cells = row.find_all(["th", "td"])
+                    if not cells:
+                        continue
+
+                    # Header row — collect column names
+                    if all(c.name == "th" for c in cells):
+                        headers = [c.get_text(" ", strip=True) for c in cells]
+                        continue
+
+                    # Data row — pair each cell with its header
+                    values = [c.get_text(" ", strip=True) for c in cells]
+                    if headers:
+                        parts = [f"[{h}] = {v}" for h, v in zip(headers, values) if v]
+                        if parts:
+                            lines.append("   ".join(parts))
+                    else:
+                        # No headers found yet, fallback to plain values
+                        lines.append("   ".join(v for v in values if v))
+                continue
+
+            # ── Non-table tags ─────────────────────────────────────────────
+            text = tag.get_text(" ", strip=True)
             if not text:
                 continue
             if tag.name == "li":
                 lines.append(f"• {text}")
             elif tag.name in ["h3", "h4"]:
                 lines.append(f"\n{text.upper()}\n")
+            elif tag.name == "p":
+                lines.append(text)
+            # th/td outside a table — fallback (shouldn't normally occur)
             elif tag.name == "th":
                 lines.append(f"[{text}]")
             elif tag.name == "td":
                 lines.append(f"  {text}")
-            else:
-                lines.append(text)
 
     return "\n".join(lines).strip()
 
