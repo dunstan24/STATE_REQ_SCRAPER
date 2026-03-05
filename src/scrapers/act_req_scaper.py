@@ -22,7 +22,7 @@ import os
 import pandas as pd
 from bs4 import BeautifulSoup
 from playwright_helper import get_page_source_playwright
-from scraper_utils import (
+from general_tools_scrap import (
     get_clean_text,
     extract_service_fee,
     export_dataframe,

@@ -1,10 +1,9 @@
-﻿state code,state stream,requirements,service fee
+﻿state code,state stream,Detail Requirements,service fee
 QLD,Workers_Living_in_Queensland,"Occupation
 - Have an occupation on the Queensland Onshore Skills List .
 - Note that Chefs and Cooks are unable to apply by working in takeaway or fast-food businesses.
 Points
-- Have a score of 65 or higher in the Australian Department of Home Affairs’ points test.
-- Have a score of 65 or higher in the Australian Department of Home Affairs’ points test.
+- Have a score of 65 or higher in the Australian Department of Home Affairs' points test.
 English
 - Have at least competent English , according to the Australian Department of Home Affairs definition.
 Work experience
@@ -27,16 +26,15 @@ Commitment to living in Queensland
 - Commit to continue living and working in:
 - Regional Queensland until at least 3 years after the date your Skilled Work Regional (Provisional) visa (subclass 491) is granted, or;
 - Queensland until at least 2 years after the date your Skilled Nominated (Permanent) visa (subclass 190) is granted.",-
-QLD,Workers_Living_offshore,"Occupation
+QLD,Workers_Living_Offshore,"Occupation
 - Have an occupation on the Queensland Offshore Skills List .
 - Note that information on employment in Queensland for certain occupations, such as licencing and registration requirements, should be checked on this list.
 Points
-- Have a score of 65 or higher in the Australian Department of Home Affairs’ points test.
-- Have a score of 65 or higher in the Australian Department of Home Affairs’ points test.
+- Have a score of 65 or higher in the Australian Department of Home Affairs' points test.
 English
 - Have at least competent English , according to the Australian Department of Home Affairs definition.
 Work experience
-- Have at least 1 year’s skilled employment experience in your nominated occupation or a closely related occupation.
+- Have at least 1 year's skilled employment experience in your nominated occupation or a closely related occupation.
 - Only work experience declared as related to your nominated occupation on your Expression of Interest (EOI) to the Australian Department of Home Affairs will be considered.
 - You must still be employed in your nominated occupation (or a closely related occupation) at the time you are invited and nominated.
 Visa subclass
@@ -47,11 +45,10 @@ Commitment to living in Queensland
 - Commit to living and working in:
 - Regional Queensland until at least 3 years after the date your Skilled Work Regional (Provisional) visa (subclass 491) is granted, or;
 - Queensland until at least 2 years after the date your Skilled Nominated (Permanent) visa (subclass 190) is granted.",-
-QLD,Building_and_Construction_Workforce_Pathway,"Occupation
+QLD,Building_and_Construction,"Occupation
 - Have an occupation on the Queensland Onshore Skills List that is indicated as included in the building and construction workforce pathway.
 Points
-- Have a score of 65 or higher in the Australian Department of Home Affairs’ points test.
-- Have a score of 65 or higher in the Australian Department of Home Affairs’ points test.
+- Have a score of 65 or higher in the Australian Department of Home Affairs' points test.
 English
 - Have at least competent English , according to the Australian Department of Home Affairs definition.
 Work experience
@@ -66,21 +63,19 @@ Work experience
 - Multiple eligible jobs can be combined to meet requirements
 - Work from home is allowed, where your employer has a physical presence in Queensland.
 Visa subclass
-- Invited candidates will be nominated for the Skilled Nominated (Permanent) visa (subclass 190) unless they do not meet the Australian Department of Home Affairs’ requirements for this visa. (See our notes on 'Are you eligible for consideration' above this table.)
+- Invited candidates will be nominated for the Skilled Nominated (Permanent) visa (subclass 190) unless they do not meet the Australian Department of Home Affairs' requirements for this visa. (See our notes on 'Are you eligible for consideration' above this table.)
 - If you have applied for, or are a current holder of, a Skilled Work Regional (Provisional) visa (subclass 491), you are not eligible for nomination for the Skilled Nominated (Permanent) visa (subclass 190). This restriction also applies to the Skilled Regional (Provisional) visa (subclass 489).
 Commitment to living in Queensland
 - Commit to continue to living and working in:
 - Regional Queensland until at least 3 years after the date your Skilled Work Regional (Provisional) visa (subclass 491) is granted, or;
 - Queensland until at least 2 years after the date your Skilled Nominated (Permanent) visa (subclass 190) is granted.",-
-QLD,Graduates_of_a_Queensland_University,"Occupation
-- Have an occupation on the Queensland Onshore Skills List .
+QLD,University_Graduates,"Occupation
 Points
-- Have a score of 65 or higher in the Australian Department of Home Affairs’ points test.
+- Have a score of 65 or higher in the Australian Department of Home Affairs' points test.
 English
-- Have at least competent English , according to the Australian Department of Home Affairs definition.
 Study
 - You have:
-- A Bachelor Degree, Master’s Degree or PhD from a Queensland university or tertiary institute that meets the Australian Study Requirement
+- A Bachelor Degree, Master's Degree or PhD from a Queensland university or tertiary institute that meets the Australian Study Requirement
 - Completed 100% of this qualification in Queensland
 - Graduated after 1 July 2021.
 - Your Queensland degree does not have to be related to your nominated occupation.
@@ -108,12 +103,12 @@ Commitment to living in Queensland
 QLD,Small_Business_Owners,"Occupation
 - Have an occupation on the Legislative Instrument 19/051 ( LIN19/051 ) .
 Living in regional Queensland
-- Have evidence that you are living in regional Queensland in an eligible postcode.
+- Have evidence that you are living in regional Queensland in an eligible postcode.
 Location of business
 - Own and operate your business in an eligible postcode in regional Queensland.
 Ownership interest
 - Have evidence you own 100% of the business. 100% ownership is required since the business was purchased or started.",-
-QLD,Additional requirements for Pathway 1 - Business purchase,"Time since purchase
+QLD,Small_Business_Pathway_1_Purchase,"Time since purchase
 - Settlement of business purchase must have occurred less than 18 months before submitting your 491 SBO Registration of Interest.
 - Businesses settled before 1 July 2024 have until 31 December 2025 to submit your 491 SBO Registration of Interest.
 Age and location of purchased business
@@ -121,11 +116,11 @@ Age and location of purchased business
 Price of purchased business
 - Have evidence you purchased your business for a minimum of $100,000.
 Operation of business
-- Have evidence you have been operating the business for a minimum of 6 months after settlement. The 6 months of operation does not start until 100% of the business purchase price is settled.
+- Have evidence you have been operating the business for a minimum of 6 months after settlement. The 6 months of operation does not start until 100% of the business purchase price is settled.
 - You are required to submit 2 quarterly Business Activity Statements (BAS), where you have owned and operated the business for the entire period of the BAS.
 Australian employee/s
 - Have evidence of employing at least 1 Australian resident working a minimum of 20 hours per week, or 2 Australian residents working 10 hours each per week. Employees cannot be a family member or a subcontractor.
 - An Australian resident for the purposes of the 491 SBO stream is an Australian citizen, an Australian permanent resident or a New Zealand citizen residing in Australia on a Special Category visa (subclass 444).",-
-QLD,Additional requirements for Pathway 2 - Start up business,"Requirement
+QLD,Small_Business_Pathway_2_Startup,"Requirement
 Operation of business and turnover
 - Have evidence of operating a profitable start-up for a minimum of 2 years, with a turnover of $200,000 in the 12 months prior to submitting your 491 SBO Registration of Interest.",-

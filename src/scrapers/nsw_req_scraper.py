@@ -22,12 +22,11 @@ import os
 import pandas as pd
 from bs4 import BeautifulSoup
 from playwright_helper import get_page_source_playwright
-from scraper_utils import (
+from general_tools_scrap import (
     get_clean_text,
     format_li,
     extract_service_fee,
-    export_dataframe,
-    fetch_and_parse
+    export_dataframe
 )
 
 # Output path relative to this script location
@@ -42,7 +41,7 @@ logger = logging.getLogger(__name__)
 
 
 def fetch_and_parse(url, selector=".nsw-layout__main"):
-    """Fetch HTML dan return BeautifulSoup container (col-md-8)."""
+    """Fetch HTML dan return BeautifulSoup container"""
     logger.info(f"Fetching: {url}")
     html = get_page_source_playwright(
         url=url, wait_for_selector=selector, extra_wait_seconds=3, bypass_cf=False
@@ -52,9 +51,9 @@ def fetch_and_parse(url, selector=".nsw-layout__main"):
         return None
 
     soup = BeautifulSoup(html, "lxml")
-    container = soup.find("div", {"id": "main", "class": "col-md-8"})
+    container = soup.find("div", {"id": "main", "class": "nsw-layout__main"})
     if not container:
-        container = soup.find("div", class_="nsw-layout_main")
+        container = soup.find("div", class_="nsw-layout__main")
     return container
 
 
@@ -153,7 +152,7 @@ def extract_li_from_wysiwyg(container, li_keyword, wysiwyg_keyword=None):
 
 
 def extract_service_fee_from_soup(soup):
-    """Wrapper untuk extract_service_fee dari scraper_utils."""
+    """Wrapper untuk extract_service_fee"""
     return extract_service_fee(soup)
 
 
@@ -212,7 +211,6 @@ if __name__ == "__main__":
     # General Requirements : wysiwyg "Basic Eligibility"
     # Detail Requirements  : wysiwyg "Key Steps..." + "Understanding Invitation Rounds..."
     df_190 = scrape_nsw_subclass(
-        selector="#main.col-md-8",
         subclass=190,
         url="https://www.nsw.gov.au/visas-and-migration/skilled-visas/skilled-nominated-visa-subclass-190",
         kw_general="Basic Eligibility",
@@ -226,7 +224,6 @@ if __name__ == "__main__":
     # General Requirements : wysiwyg "About NSW Nomination"
     # Detail Requirements  : wysiwyg "Understanding Invitation Rounds..." + "Key Steps..."
     df_491 = scrape_nsw_subclass(
-        selector="#main.col-md-8",
         subclass=491,
         url="https://www.nsw.gov.au/visas-and-migration/skilled-visas/skilled-work-regional-visa-subclass-491",
         kw_general="About NSW Nomination",
