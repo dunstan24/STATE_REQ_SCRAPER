@@ -2,12 +2,13 @@
 playwright_helper.py — Single fetch engine untuk semua state scraper.
 
 Dua mode operasi:
-  - bypass_cf=False (default) : headless biasa, untuk 7 state tanpa proteksi CF
-  - bypass_cf=True            : non-headless + stealth, khusus ACT (Cloudflare Turnstile)
+  - bypass_cf=False (default) : headless biasa (Playwright), untuk state tanpa proteksi CF
+  - bypass_cf=True            : headless CF-safe (Camoufox), khusus ACT (Cloudflare Turnstile)
 
 Instalasi (jalankan sekali):
-    pip install playwright playwright-stealth
+    pip install playwright camoufox[geoip]
     playwright install chromium
+    python -m camoufox fetch
 """
 
 import asyncio
@@ -17,7 +18,9 @@ from typing import Optional
 
 logger = logging.getLogger(__name__)
 
+
 # ── Cek dependensi ─────────────────────────────────────────────────────────────
+
 try:
     from playwright.async_api import async_playwright, Page, TimeoutError as PWTimeout
     _PLAYWRIGHT_AVAILABLE = True
@@ -29,17 +32,19 @@ except ImportError:
     )
 
 try:
-    from playwright_stealth import stealth_async
-    _STEALTH_AVAILABLE = True
+    from camoufox.async_api import AsyncCamoufox
+    _CAMOUFOX_AVAILABLE = True
 except ImportError:
-    _STEALTH_AVAILABLE = False
+    _CAMOUFOX_AVAILABLE = False
     logger.warning(
-        "[Playwright] 'playwright-stealth' belum diinstall.\n"
-        "Jalankan: pip install playwright-stealth"
+        "[Camoufox] 'camoufox' belum diinstall.\n"
+        "Jalankan: pip install camoufox[geoip] && python -m camoufox fetch\n"
+        "bypass_cf=True tidak akan berfungsi tanpa camoufox."
     )
 
 
 # ── Konstanta ──────────────────────────────────────────────────────────────────
+
 _UA = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -68,110 +73,106 @@ def _is_cloudflare_page(html: str) -> bool:
     return any(marker in snippet for marker in _CLOUDFLARE_MARKERS)
 
 
-async def _wait_for_turnstile(page: "Page", timeout_ms: int = _CF_TURNSTILE_TIMEOUT_MS) -> bool:
+async def _wait_for_turnstile(page, timeout_ms: int = _CF_TURNSTILE_TIMEOUT_MS) -> bool:
     """Poll sampai halaman CF challenge hilang. Return True jika berhasil."""
-    logger.info("[Playwright] Menunggu Cloudflare Turnstile selesai...")
+    logger.info("[Camoufox] Menunggu Cloudflare Turnstile selesai...")
     start    = time.time()
     deadline = timeout_ms / 1000
 
     while (time.time() - start) < deadline:
         try:
             if not _is_cloudflare_page(await page.content()):
-                logger.info(f"[Playwright] Turnstile resolved dalam {time.time()-start:.1f}s")
+                logger.info(f"[Camoufox] Turnstile resolved dalam {time.time()-start:.1f}s")
                 return True
         except Exception:
             pass
         await asyncio.sleep(2)
 
-    logger.warning(f"[Playwright] Turnstile TIMEOUT setelah {deadline:.0f}s")
+    logger.warning(f"[Camoufox] Turnstile TIMEOUT setelah {deadline:.0f}s")
     return False
 
 
-# ── Browser & context builders ─────────────────────────────────────────────────
+# ── Core async fetchers ────────────────────────────────────────────────────────
 
-async def _build_browser(playwright, bypass_cf: bool):
-    """
-    bypass_cf=True  → non-headless, window di luar layar, untuk Cloudflare.
-    bypass_cf=False → headless standar, lebih cepat, untuk site biasa.
-    """
-    common_args = [
-        "--no-sandbox",
-        "--disable-blink-features=AutomationControlled",
-        "--disable-dev-shm-usage",
-    ]
-
-    if bypass_cf:
-        return await playwright.chromium.launch(
-            headless=False,
-            args=common_args + [
-                "--window-position=-10000,0",
-                "--window-size=1920,1080",
-                "--disable-infobars",
-                "--disable-background-timer-throttling",
-                "--disable-backgrounding-occluded-windows",
-                "--disable-renderer-backgrounding",
-            ],
-        )
-    else:
-        return await playwright.chromium.launch(
-            headless=True,
-            args=common_args,
-        )
-
-
-async def _build_context(browser, bypass_cf: bool):
-    """Buat browser context dengan fingerprint yang tepat sesuai mode."""
-    if bypass_cf:
-        context = await browser.new_context(
-            user_agent=_UA,
-            viewport={"width": 1920, "height": 1080},
-            screen={"width": 1920, "height": 1080},
-            locale="en-AU",
-            timezone_id="Australia/Sydney",
-        )
-        # Override navigator properties untuk bypass CF detection
-        await context.add_init_script("""
-            Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
-            Object.defineProperty(navigator, 'plugins',   { get: () => [1, 2, 3, 4, 5] });
-            Object.defineProperty(navigator, 'languages', { get: () => ['en-AU', 'en'] });
-            const origQuery = window.navigator.permissions.query;
-            window.navigator.permissions.query = (p) =>
-                p.name === 'notifications'
-                    ? Promise.resolve({ state: Notification.permission })
-                    : origQuery(p);
-            window.chrome = { runtime: {} };
-        """)
-    else:
-        # Context minimal untuk site biasa
-        context = await browser.new_context(
-            user_agent=_UA,
-            locale="en-AU",
-            timezone_id="Australia/Sydney",
-        )
-
-    return context
-
-
-# ── Core async fetcher ─────────────────────────────────────────────────────────
-
-async def _fetch_async(
+async def _fetch_with_camoufox(
     url: str,
-    bypass_cf: bool,
     wait_for_selector: Optional[str],
     extra_wait_seconds: int,
 ) -> Optional[str]:
+    """Fetch menggunakan Camoufox — headless, bypass Cloudflare Turnstile."""
+    if not _CAMOUFOX_AVAILABLE:
+        logger.error(
+            "[Camoufox] Module tidak tersedia. "
+            "Jalankan: pip install camoufox[geoip] && python -m camoufox fetch"
+        )
+        return None
 
+    try:
+        async with AsyncCamoufox(
+            headless=True,
+            geoip=True,
+            locale="en-AU",
+            os="windows",
+        ) as browser:
+            page = await browser.new_page()
+
+            logger.info(f"[Camoufox] Membuka: {url}")
+            await page.goto(url, timeout=_PAGE_LOAD_TIMEOUT_MS, wait_until="domcontentloaded")
+
+            # Tunggu sampai CF challenge selesai jika ada
+            if _is_cloudflare_page(await page.content()):
+                logger.info("[Camoufox] CF challenge terdeteksi, menunggu auto-resolve...")
+                resolved = await _wait_for_turnstile(page)
+                if not resolved:
+                    logger.error("[Camoufox] Gagal melewati Cloudflare Turnstile.")
+                    with open("debug_cf_blocked.html", "w", encoding="utf-8") as f:
+                        f.write(await page.content())
+                    return None
+
+            # Tunggu selector konten muncul
+            if wait_for_selector:
+                try:
+                    await page.wait_for_selector(wait_for_selector, timeout=_SELECTOR_WAIT_MS)
+                    logger.info(f"[Camoufox] Selector '{wait_for_selector}' ditemukan.")
+                except Exception:
+                    logger.warning(
+                        f"[Camoufox] Selector '{wait_for_selector}' tidak muncul "
+                        f"dalam {_SELECTOR_WAIT_MS/1000:.0f}s — lanjut ambil HTML."
+                    )
+
+            if extra_wait_seconds > 0:
+                await asyncio.sleep(extra_wait_seconds)
+
+            html = await page.content()
+            logger.info(f"[Camoufox] HTML didapat ({len(html):,} chars)")
+            return html
+
+    except Exception as e:
+        logger.error(f"[Camoufox] Error: {e}", exc_info=True)
+        return None
+
+
+async def _fetch_with_playwright(
+    url: str,
+    wait_for_selector: Optional[str],
+    extra_wait_seconds: int,
+) -> Optional[str]:
+    """Fetch menggunakan Playwright headless biasa — untuk site tanpa CF."""
     async with async_playwright() as p:
-        browser = await _build_browser(p, bypass_cf)
-        context = await _build_context(browser, bypass_cf)
-        page    = await context.new_page()
-
-        # Stealth hanya diaktifkan saat bypass_cf
-        if bypass_cf and _STEALTH_AVAILABLE:
-            await stealth_async(page)
-            logger.info("[Playwright] Stealth aktif (CF bypass mode).")
-        elif bypass_cf and not _STEALTH_AVAILABLE:
-            logger.warning("[Playwright] Stealth tidak aktif — install playwright-stealth.")
+        browser = await p.chromium.launch(
+            headless=True,
+            args=[
+                "--no-sandbox",
+                "--disable-blink-features=AutomationControlled",
+                "--disable-dev-shm-usage",
+            ],
+        )
+        context = await browser.new_context(
+            user_agent=_UA,
+            locale="en-AU",
+            timezone_id="Australia/Sydney",
+        )
+        page = await context.new_page()
 
         await page.set_extra_http_headers({
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
@@ -180,24 +181,10 @@ async def _fetch_async(
             "Upgrade-Insecure-Requests": "1",
         })
 
-        page_load_timeout = _PAGE_LOAD_TIMEOUT_MS if bypass_cf else _HEADLESS_LOAD_TIMEOUT_MS
-
         try:
-            logger.info(f"[Playwright] {'[CF] ' if bypass_cf else ''}Membuka: {url}")
-            await page.goto(url, timeout=page_load_timeout, wait_until="domcontentloaded")
+            logger.info(f"[Playwright] Membuka: {url}")
+            await page.goto(url, timeout=_HEADLESS_LOAD_TIMEOUT_MS, wait_until="domcontentloaded")
 
-            # Khusus bypass_cf: tunggu Turnstile selesai
-            if bypass_cf:
-                if _is_cloudflare_page(await page.content()):
-                    logger.info("[Playwright] CF challenge terdeteksi, menunggu auto-resolve...")
-                    resolved = await _wait_for_turnstile(page)
-                    if not resolved:
-                        logger.error("[Playwright] Gagal melewati Cloudflare Turnstile.")
-                        with open("debug_cf_blocked.html", "w", encoding="utf-8") as f:
-                            f.write(await page.content())
-                        return None
-
-            # Tunggu selector konten muncul
             if wait_for_selector:
                 try:
                     await page.wait_for_selector(wait_for_selector, timeout=_SELECTOR_WAIT_MS)
@@ -208,7 +195,6 @@ async def _fetch_async(
                         f"dalam {_SELECTOR_WAIT_MS/1000:.0f}s — lanjut ambil HTML."
                     )
 
-            # Extra wait agar JS selesai render
             if extra_wait_seconds > 0:
                 await asyncio.sleep(extra_wait_seconds)
 
@@ -223,53 +209,24 @@ async def _fetch_async(
             await browser.close()
 
 
+async def _fetch_async(
+    url: str,
+    bypass_cf: bool,
+    wait_for_selector: Optional[str],
+    extra_wait_seconds: int,
+) -> Optional[str]:
+    """Router: pilih engine berdasarkan bypass_cf flag."""
+    if bypass_cf:
+        return await _fetch_with_camoufox(url, wait_for_selector, extra_wait_seconds)
+    else:
+        return await _fetch_with_playwright(url, wait_for_selector, extra_wait_seconds)
+
+
 # ── Public API ─────────────────────────────────────────────────────────────────
 
 # Konstanta publik — bisa diimport scraper lain yang butuh nilai timeout
 PAGE_LOAD_TIMEOUT_MS = _HEADLESS_LOAD_TIMEOUT_MS   # 30s, untuk non-CF sites
 SELECTOR_TIMEOUT_MS  = _SELECTOR_WAIT_MS            # 30s, tunggu selector
-
-
-async def create_browser_context(bypass_cf: bool = False):
-    """
-    Buat dan return (playwright_instance, browser, context) yang sudah dikonfigurasi.
-
-    Digunakan oleh scraper yang butuh interaksi custom di dalam page
-    (contoh: WA scraper yang perlu klik Show All + tunggu AJAX)
-    sebelum mengambil HTML-nya.
-
-    PENTING: Caller wajib menutup resource setelah selesai:
-
-        pw, browser, context = await create_browser_context()
-        try:
-            page = await context.new_page()
-            # ... interaksi custom ...
-            html = await page.content()
-        finally:
-            await browser.close()
-            await pw.stop()
-
-    Parameters
-    ----------
-    bypass_cf : False (default) → headless biasa.
-                True → non-headless + stealth untuk Cloudflare.
-
-    Returns
-    -------
-    Tuple (playwright_instance, browser, context)
-    """
-    if not _PLAYWRIGHT_AVAILABLE:
-        raise RuntimeError(
-            "playwright tidak tersedia. "
-            "Jalankan: pip install playwright && playwright install chromium"
-        )
-
-    from playwright.async_api import async_playwright as _async_playwright
-
-    pw      = await _async_playwright().start()
-    browser = await _build_browser(pw, bypass_cf)
-    context = await _build_context(browser, bypass_cf)
-    return pw, browser, context
 
 
 def get_page_source_playwright(
@@ -287,8 +244,8 @@ def get_page_source_playwright(
     wait_for_selector : CSS selector yang ditunggu sebelum ambil HTML.
                         Default 'table'. Set None jika tidak perlu tunggu.
     extra_wait_seconds: Detik tambahan setelah selector muncul (render JS).
-    bypass_cf         : False (default) → headless biasa untuk 7 state normal.
-                        True → non-headless + stealth khusus ACT (Cloudflare).
+    bypass_cf         : False (default) → headless Playwright untuk state normal.
+                        True  → headless Camoufox khusus ACT (Cloudflare Turnstile).
 
     Returns
     -------
@@ -309,3 +266,70 @@ def get_page_source_playwright(
         return None
     finally:
         loop.close()
+
+
+async def create_browser_context(bypass_cf: bool = False):
+    """
+    Buat dan return resource browser yang sudah dikonfigurasi.
+
+    Digunakan oleh scraper yang butuh interaksi custom di dalam page
+    (contoh: WA scraper yang perlu klik Show All + tunggu AJAX).
+
+    ┌─────────────────┬──────────────────────────────────────────────────┐
+    │ bypass_cf=False │ returns (playwright_instance, browser, context)  │
+    │ bypass_cf=True  │ returns (camoufox_instance, browser, None)       │
+    └─────────────────┴──────────────────────────────────────────────────┘
+
+    PENTING: Caller wajib menutup resource setelah selesai.
+
+    Contoh bypass_cf=False (Playwright):
+        pw, browser, context = await create_browser_context()
+        try:
+            page = await context.new_page()
+            html = await page.content()
+        finally:
+            await browser.close()
+            await pw.stop()
+
+    Contoh bypass_cf=True (Camoufox):
+        cf, browser, _ = await create_browser_context(bypass_cf=True)
+        try:
+            page = await browser.new_page()
+            html = await page.content()
+        finally:
+            await browser.close()
+            await cf.__aexit__(None, None, None)
+
+    Parameters
+    ----------
+    bypass_cf : False → headless Playwright.
+                True  → headless Camoufox (CF-safe).
+
+    Returns
+    -------
+    Tuple (engine_instance, browser, context_or_None)
+    """
+    if bypass_cf:
+        if not _CAMOUFOX_AVAILABLE:
+            raise RuntimeError(
+                "camoufox tidak tersedia. "
+                "Jalankan: pip install camoufox[geoip] && python -m camoufox fetch"
+            )
+        cf      = AsyncCamoufox(headless=True, geoip=True, locale="en-AU", os="windows")
+        browser = await cf.__aenter__()
+        return cf, browser, None
+
+    else:
+        if not _PLAYWRIGHT_AVAILABLE:
+            raise RuntimeError(
+                "playwright tidak tersedia. "
+                "Jalankan: pip install playwright && playwright install chromium"
+            )
+        from playwright.async_api import async_playwright as _async_playwright
+        pw      = await _async_playwright().start()
+        browser = await pw.chromium.launch(
+            headless=True,
+            args=["--no-sandbox", "--disable-blink-features=AutomationControlled", "--disable-dev-shm-usage"],
+        )
+        context = await browser.new_context(user_agent=_UA, locale="en-AU", timezone_id="Australia/Sydney")
+        return pw, browser, context
