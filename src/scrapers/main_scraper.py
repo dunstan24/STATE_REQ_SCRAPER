@@ -167,37 +167,96 @@ def scrape_tas():
 # ── Combined export ───────────────────────────────────────────────────────────
 
 def export_combined(results, state_names):
-    valid = [df for df in results if df is not None and not df.empty]
-    if not valid:
+    """
+    Export semua state ke satu Excel file dengan sheet terpisah per state.
+    Juga export combined CSV dan JSON.
+
+    Sheet name = state code (ACT, NT, NSW, QLD, SA, TAS, VIC, WA)
+    """
+    os.makedirs(_COMBINED_DIR, exist_ok=True)
+
+    xlsx_path = os.path.join(_COMBINED_DIR, "requirements_all_states.xlsx")
+    csv_path  = os.path.join(_COMBINED_DIR, "requirements_all_states.csv")
+    json_path = os.path.join(_COMBINED_DIR, "requirements_all_states.json")
+
+    valid_pairs = [
+        (name, df)
+        for name, df in zip(state_names, results)
+        if df is not None and not df.empty
+    ]
+
+    if not valid_pairs:
         logger.error("[Combined] Tidak ada data untuk digabungkan.")
         return
 
-    combined = pd.concat(valid, ignore_index=True)
-    os.makedirs(_COMBINED_DIR, exist_ok=True)
-
-    csv_path  = os.path.join(_COMBINED_DIR, "requirements_all_states.csv")
-    json_path = os.path.join(_COMBINED_DIR, "requirements_all_states.json")
-    xlsx_path = os.path.join(_COMBINED_DIR, "requirements_all_states.xlsx")
-
-    combined.to_csv(csv_path,   index=False, encoding="utf-8-sig")
-    combined.to_json(json_path, orient="records", indent=4)
-
+    # ── Multi-sheet Excel ─────────────────────────────────────────────────
     try:
-        combined.to_excel(xlsx_path, index=False, engine="openpyxl")
-        try:
-            from general_tools_scrap import format_excel
-            format_excel(xlsx_path)
-        except Exception:
-            pass
-        logger.info(f"[Combined] XLSX → {xlsx_path}")
+        from openpyxl import load_workbook
+        from openpyxl.styles import Alignment, Font, PatternFill
+        from openpyxl.utils import get_column_letter
+
+        with pd.ExcelWriter(xlsx_path, engine="openpyxl") as writer:
+            for state_name, df in valid_pairs:
+                df.to_excel(writer, sheet_name=state_name, index=False)
+
+        # Apply formatting to each sheet
+        wb = load_workbook(xlsx_path)
+        for state_name, df in valid_pairs:
+            ws = wb[state_name]
+
+            # Header row styling
+            header_fill = PatternFill(start_color="1F4E79", end_color="1F4E79", fill_type="solid")
+            header_font = Font(color="FFFFFF", bold=True)
+            wrap_top    = Alignment(wrap_text=True, vertical="top")
+
+            for cell in ws[1]:
+                cell.fill      = header_fill
+                cell.font      = header_font
+                cell.alignment = Alignment(wrap_text=True, vertical="center", horizontal="center")
+
+            # Data rows — wrap text, align top
+            for row in ws.iter_rows(min_row=2):
+                for cell in row:
+                    cell.alignment = wrap_top
+
+            # Column widths — wide for text-heavy columns, auto for short ones
+            for col in ws.columns:
+                col_letter  = col[0].column_letter
+                header_text = str(col[0].value or "").lower()
+                if any(kw in header_text for kw in ["requirement", "general", "detail", "tse", "tsg", "ter", "tbo"]):
+                    ws.column_dimensions[col_letter].width = 80
+                else:
+                    max_len = max((len(str(cell.value or "")) for cell in col), default=10)
+                    ws.column_dimensions[col_letter].width = min(max_len + 4, 40)
+
+            # Row heights based on newline count
+            for row in ws.iter_rows(min_row=2):
+                max_lines = max(
+                    (str(cell.value or "").count("\n") + 1 for cell in row),
+                    default=1,
+                )
+                ws.row_dimensions[row[0].row].height = min(max_lines * 15, 409)
+
+        wb.save(xlsx_path)
+        logger.info(f"[Combined] XLSX ({len(valid_pairs)} sheets) → {xlsx_path}")
+
     except Exception as e:
         logger.warning(f"[Combined] Gagal export XLSX: {e}")
 
-    logger.info(f"[Combined] {len(combined)} total baris dari {len(valid)} state")
+    # ── Combined CSV & JSON ───────────────────────────────────────────────
+    try:
+        combined = pd.concat([df for _, df in valid_pairs], ignore_index=True)
+        combined.to_csv(csv_path,   index=False, encoding="utf-8-sig")
+        combined.to_json(json_path, orient="records", indent=4)
+        logger.info(f"[Combined] CSV  → {csv_path}")
+        logger.info(f"[Combined] JSON → {json_path}")
+        logger.info(f"[Combined] {len(combined)} total baris dari {len(valid_pairs)} state")
+    except Exception as e:
+        logger.warning(f"[Combined] Gagal export CSV/JSON: {e}")
 
     print(f"\n{'='*60}")
-    print(f"  COMBINED: {len(combined)} rows dari {len(valid)}/8 states")
-    print(f"  -> {csv_path}")
+    print(f"  COMBINED EXCEL: {len(valid_pairs)} sheets ({', '.join(n for n, _ in valid_pairs)})")
+    print(f"  -> {xlsx_path}")
     print(f"{'='*60}")
 
 
