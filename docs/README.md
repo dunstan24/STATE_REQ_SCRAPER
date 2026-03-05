@@ -1,129 +1,114 @@
-# Australian Immigration Data Scraper (Occupation List Multi-State Scraper)
+# Australian State Nomination Requirements Scraper
 
-A professional Python web scraping tool designed to extract State and Territory occupation list data from 8 Australian states and territories, normalizing it against the ANZSCO master list.
+## 📖 Deskripsi Proyek
+Proyek ini adalah sebuah sistem otomasi *web scraping* yang dirancang untuk mengumpulkan data persyaratan nominasi visa wilayah/negara bagian (State Nomination Visa Requirements) dari berbagai negara bagian di Australia (khususnya untuk *Skilled Visas* seperti subclass 190 dan 491). 
 
-## 🎯 Purpose
+Scraper akan mengekstraksi informasi krusial (contohnya *General Requirements*, kriteria khusus jalur pelamar seperti *Offshore/Onshore*, hingga *Service Fee*), kemudian menormalisasikannya menjadi format data terstruktur yang mudah dianalisis (CSV, JSON, dan Excel/XLSX).
 
-This tool automatically scrapes immigration data regarding State and Territory occupation lists. It is engineered to handle differing website structures, CAPTCHAs, and dynamic content across ACT, NSW, NT, QLD, SA, TAS, VIC, and WA.
+## 🚀 Fitur Utama
+- **Multi-State Scraping Terpadu:** Sistem dirancang untuk melakukan scraping data secara otomatis dan berurutan untuk 8 wilayah di Australia: **ACT, NT, NSW, QLD, SA, TAS, VIC, dan WA**.
+- **Kompilasi Data (Combined Output):** Meskipun menyimpan output untuk setiap negara bagian secara individu, alat ini secara otomatis akan menggabungkannya ke dalam satu file *master* berformat CSV, JSON, atau Excel (`requirements_all_states`).
+- **Sistem Modular & Maintainable:** Menggunakan penanganan error per negara bagian, sehingga jika ada 1 situs negara bagian yang gagal di-scrape karena pembaruan UI/sistem anti-bot web pemerintah, negara bagian lainnya bisa terus berjalan.
+- **Logging Ekstensif:** Proses terekam rapi di `main_scraper.log`, mempermudah pelacakan (debugging) apabila scraping gagal di bagian tertentu.
+- **Handling Anti-Bot:** Dibekali konfigurasi headless browser (seperti `undetected_chromedriver` & Playwright helpers) yang meminimalkan risiko diblokir.
 
-## ✨ Features
+---
 
-- **Automated Web Scraping**: Uses Selenium and Playwright for dynamic content handling.
-- **Data Normalization**: Automatically maps extracted and loosely formatted occupations against a Master ANZSCO list to produce standardized codes and names.
-- **Crash Resiliency**: Sub-results are saved instantly as batch CSVs per-state, ensuring partial data is preserved even if another state scraper fails.
-- **Multiple Export Formats**: CSV and Excel.
-- **Robust Error Handling**: Comprehensive logging and error recovery.
-- **N8N Integration Ready**: Built-in support for n8n automation workflows.
+## 🛠️ Persyaratan (Prerequisites)
+Pastikan sistem komputer Anda memiliki **Python 3.9+** terinstal, beserta akses internet yang stabil.
 
-## 📋 Requirements
+Kebutuhan library utama dapat dilihat pada file `requirements.txt`, termasuk namun tidak terbatas pada:
+- `selenium` & `webdriver-manager`
+- `beautifulsoup4` & `lxml`
+- `undetected-chromedriver`
+- `pandas` & `openpyxl` (untuk format output & export Excel)
+- `requests`
 
-- Python 3.8 or higher
-- Chrome browser (for Selenium/Playwright)
-- Internet connection
+---
 
-## 🚀 Installation
+## 📥 Instalasi & Persiapan
 
-### Step 1: Install Python Dependencies
+1. **Clone Repository (Jika belum)**
+   ```bash
+   git clone <URL-REPOSITORY-ANDA>
+   cd state_nomination_scrap
+   ```
 
-```powershell
-pip install -r requirements.txt
-playwright install
+2. **Buat dan Aktifkan Virtual Environment (Direkomendasikan)**
+   ```bash
+   # Pengguna Windows:
+   python -m venv venv
+   venv\Scripts\activate
+   
+   # Pengguna macOS/Linux:
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+
+3. **Install Dependensi Library**
+   ```bash
+   pip install -r requirements.txt
+   ```
+   *(Opsional: Karena project kelihatannya menyertakan file pendukung playwright di beberapa tempat, jika Anda mendapati error bahwa module "playwright" tidak ditemukan, jalankan:)*
+   ```bash
+   pip install playwright
+   playwright install
+   ```
+
+4. **Pengaturan Konfigurasi (Opsional)**
+   Anda bisa melihat file `src/config.py` untuk menyesuaikan opsi seperti:
+   - `HEADLESS_MODE = True` (Ganti `False` jika ingin melihat visualisasi browser saat *scraping*)
+   - Timeout halaman
+   - Format file tujuan *export*.
+
+---
+
+## ⚙️ Cara Menggunakan (User Guide)
+
+Sistem ini didesain relatif *plug-and-play*. Untuk menjalankan proses ekstraksi secara total (semua wilayah negara bagian):
+
+1. Buka Terminal / Command Prompt dan pastikan telah masuk di dalam root folder project (`state_nomination_scrap`).
+2. Jalankan perintah eksekusi file utama:
+   ```bash
+   python src/scrapers/main_scraper.py
+   ```
+3. Scraper secara sekuensial akan menjalankan script per negara bagian:
+   `ACT → NT → NSW → QLD → SA → TAS → VIC → WA`
+4. Log interaktif akan terlihat di terminal CLI Anda serta tersimpan di file `main_scraper.log`. Jika sukses, proses tiap *state* akan memberi notifikasi berupa durasi eksekusi dan total baris data yang diekstrak.
+
+### Lokasi Data Hasil Scraping (Output)
+Semua output data akan diletakkan di dalam folder `src/scrapers/output_scrape/`:
+```text
+src/scrapers/output_scrape/
+│
+├── act/
+├── nsw/
+├── ... dll per negara bagian
+│
+└── combined/
+    ├── requirements_all_states.csv
+    ├── requirements_all_states.json
+    └── requirements_all_states.xlsx   <-- Data Terintegrasi
 ```
+File Excel yang dihasilkan akan diformat secara otomatis (*auto-fit* panjang kolom, dll) karena sudah tertanam fungsi *formatter* khusus di `general_tools_scrap.py`.
 
-## 📖 Usage
+---
 
-### Basic Usage
+## 📁 Struktur Direktori
 
-Run the scraper through the main entry point:
+Berikut adalah beberapa berkas & folder krusial dalam project ini untuk dapat dipahami pengembang (Developer):
 
-```powershell
-python run_scraper.py
-```
+- **`/src/scrapers/main_scraper.py`**: Merupakan titik masuk operasi *scraping*. 
+- **`/src/scrapers/<kode_state>_req_scraper.py`**: *Script logic* ekstraksi data milik setiap negara bagian (misal: `qld_req_scraper.py` atau `act_req_scraper.py`).
+- **`/src/config.py`**: Mengatur target URLs (link situs pemerintah), mode scraping, serta variabel pendukung lainnya.
+- **`/src/scrapers/general_tools_scrap.py`**: Kumpulan modul pendukung (helper), misal alat formatting Excel (*format_excel*) atau pencari nilai Service Fee (*extract_service_fee*).
+- **`/requirements.txt`**: Daftar konfigurasi *environment* baku dari Python.
+- **`N8N_QUICKSTART.md` / `n8n_integration.py`**: File terkait konektivitas/integrasi workflow data ke server N8N untuk otomatisasi internal tim Anda.
 
-### Configuration
+---
 
-Edit `src/config.py` to customize settings like `TARGET_URLS` and configuration options. 
-Note: The `--no-headless` flag defaults to False, but some states like ACT might inherently run non-headless due to protections.
+## ⚠️ Batasan dan Troubleshooting (Pemecahan Masalah)
 
-### Output
-
-The scraper creates the following directories and files:
-
-```
-output/run_YYYYMMDD_HHMMSS/
-├── occupation_list_FINAL_YYYYMMDD_HHMMSS.csv
-├── occupation_list_FINAL_YYYYMMDD_HHMMSS.xlsx
-└── [STATE]_[list_type]_raw.csv (for each state)
-
-logs/
-└── scraper_YYYYMMDD_HHMMSS.log
-```
-
-## 🔄 N8N Integration
-
-The project has robust integration capabilities with n8n described in `N8N_CONNECTION_GUIDE.md`.
-
-## 🏗️ Project Structure
-
-```
-STATE ALLOCATION 2026/
-├── run_scraper.py          # Main complete scraping script
-├── src/
-│   ├── scrapers/           # Submodules detailing extraction per state
-│   ├── config.py           # Configuration settings
-│   ├── normalizer.py       # Maps arbitrary titles to ANZSCO standard
-│   ├── n8n_integration.py  # N8N integration utilities
-│   └── data_analyzer.py    # Data analysis tools
-├── requirements.txt        # Python dependencies
-├── README.md               # Main repository file
-├── output/                 # Scraped data output
-└── logs/                   # Execution logs
-```
-
-## 🔧 Advanced Usage
-
-### Specific State extraction
-
-To debug or run just one state simply pass it as a flag parameter:
-```powershell
-python run_scraper.py --state QLD --no-headless
-```
-
-### Skipping Normalization
-
-If the ANZSCO master file isn't needed, you can export raw records identically to how they appear on the target websites:
-```powershell
-python run_scraper.py --skip-normalize
-```
-
-## 🐛 Troubleshooting
-
-### Page Not Loading
-
-- Check your internet connection
-- The site structure might have changed. Visit the URL directly and compare it to the specific state scraper defined in `src/scrapers/[state]_scraper.py`
-- Try utilizing the `--no-headless` flag to verify if a CAPTCHA blocks the headless browser instance
-
-### Import Errors
-
-Make sure all dependencies are installed:
-
-```powershell
-pip install -r requirements.txt --upgrade
-```
-
-## 📝 Logging
-
-Logs are saved in the `logs/` directory with timestamps. Log levels:
-
-- **INFO**: Normal operation
-- **WARNING**: Potential issues
-- **ERROR**: Errors that don't stop execution
-- **CRITICAL**: Fatal errors
-
-## 🔒 Best Practices
-
-1. **Respect Rate Limits**: Don't run the scraper too frequently
-2. **Monitor Logs**: Check logs regularly for errors
-3. **Update Regularly**: Website structures change - update extraction logic in the `scrapers/` subfolder as needed
-4. **Test First**: Run a single state with `--no-headless` when writing a revised script before running the full batch.
+1. **Perubahan Format/Struktur Situs Pemerintah:** Skrip web scraping akan sangat bergantung terhadap posisi elemen HTML pada situs pemerintah. Jika tiba-tiba satu negara bagian **GAGAL** dalam tahap *scrape*, sangat wajar ini dikarenakan UI *website* mereka baru saja berubah desainnya. Anda harus memodifikasi penyeleksi CSS (*CSS selectors*) atau rupa pengurai (*BeautifulSoup parsers*) dari masing-masing sub-skrip state yang ada di folder `src/scrapers/`.
+2. **Keamanan Anti-bot & Cloudflare Turnstile:** Situs wilayah seperti ACT biasanya memiliki pertahanan bot (Cloudflare) yang kuat. Scraper saat ini menangani sebagian dengan *undetected-chromedriver* / *playwright*, tetapi bypass ekstra terkadang bisa tetap diblokir.
+3. Anda dapat memeriksa rincian lebih detail terkait pesan error di `/main_scraper.log`.
