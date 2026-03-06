@@ -296,15 +296,15 @@ def trigger_n8n_webhook(csv_path, successful, total):
         csv_base64 = base64.b64encode(f.read()).decode("utf-8")
 
     payload = {
-        "subject":    f"Scraper Results — {successful}/{total} states berhasil",
-        "message":    (
-            f"Scraping selesai.\n"
-            f"States berhasil : {successful}/{total}\n"
-            f"File terlampir  : requirements_all_states.csv"
-        ),
-        "filename":   "requirements_all_states.csv",
-        "csv_base64": csv_base64,
-    }
+    "subject":    f"Scraper Results — {successful}/{total} states berhasil",
+    "message":    (
+        f"Scraping selesai.\n"
+        f"States berhasil : {successful}/{total}\n"
+        f"File terlampir  : requirements_all_states.xlsx"
+    ),
+    "filename":   "requirements_all_states.xlsx",
+    "file_base64": base64.b64encode(f.read()).decode("utf-8"),  # rename key too
+}
 
     try:
         data = json.dumps(payload).encode("utf-8")
@@ -412,5 +412,13 @@ if __name__ == "__main__":
     print("Lihat main_scraper.log untuk detail lengkap.")
 
     # ── Trigger n8n → send email ──────────────────────────────────────────
-    csv_path = os.path.join(_COMBINED_DIR, "requirements_all_states.csv")
-    trigger_n8n_webhook(csv_path, successful, total=8)
+    xlsx_path = os.path.join(_COMBINED_DIR, "requirements_all_states.xlsx")
+trigger_n8n_webhook(xlsx_path, successful, total=8)
+
+
+
+
+
+
+
+
