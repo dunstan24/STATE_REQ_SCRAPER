@@ -1,5 +1,5 @@
 """
-main.py — Run all state visa requirement scrapers
+main_scraper.py — Run all state visa requirement scrapers
 
 Urutan eksekusi:
   ACT → NT → NSW → QLD → SA → TAS → VIC → WA
@@ -261,22 +261,24 @@ def export_combined(results, state_names):
 
 
 # ── n8n Webhook trigger ───────────────────────────────────────────────────────
+# URL is read from GitHub Actions Secret: N8N_WEBHOOK_URL
+# This should point to the /receive-results webhook in your n8n Cloud workflow
+# ─────────────────────────────────────────────────────────────────────────────
 
-# Read from environment variable (set as GitHub Actions Secret: N8N_WEBHOOK_URL)
-# For local testing you can set it manually:  export N8N_WEBHOOK_URL="https://..."
-N8N_WEBHOOK_URL = "https://snow213.app.n8n.cloud/webhook/receive-results"
+N8N_WEBHOOK_URL = os.environ.get("N8N_WEBHOOK_URL", "")
 
-def trigger_n8n_webhook(csv_path, successful, total):
+
+def trigger_n8n_webhook(xlsx_path, successful, total):
     """
     POST ke n8n webhook setelah scraping selesai.
-    CSV dikirim sebagai base64 di dalam payload JSON
+    XLSX dikirim sebagai base64 di dalam payload JSON
     agar n8n Cloud bisa langsung attach ke email tanpa akses disk.
 
     Payload yang dikirim:
       subject      : subject email
       message      : body email
       filename     : nama file attachment
-      csv_base64   : isi CSV di-encode base64
+      file_base64  : isi XLSX di-encode base64
     """
     import urllib.request
     import urllib.error
@@ -287,24 +289,24 @@ def trigger_n8n_webhook(csv_path, successful, total):
         logger.warning("[Webhook] N8N_WEBHOOK_URL belum diset — skip trigger.")
         return
 
-    if not csv_path or not os.path.exists(csv_path):
-        logger.warning(f"[Webhook] CSV tidak ditemukan di: {csv_path} — skip trigger.")
+    if not xlsx_path or not os.path.exists(xlsx_path):
+        logger.warning(f"[Webhook] File tidak ditemukan di: {xlsx_path} — skip trigger.")
         return
 
-    # Read and encode CSV as base64
-    with open(csv_path, "rb") as f:
-        csv_base64 = base64.b64encode(f.read()).decode("utf-8")
+    # Read and encode XLSX as base64
+    with open(xlsx_path, "rb") as f:
+        file_base64 = base64.b64encode(f.read()).decode("utf-8")
 
     payload = {
-    "subject":    f"Scraper Results — {successful}/{total} states berhasil",
-    "message":    (
-        f"Scraping selesai.\n"
-        f"States berhasil : {successful}/{total}\n"
-        f"File terlampir  : requirements_all_states.xlsx"
-    ),
-    "filename":   "requirements_all_states.xlsx",
-    "file_base64": base64.b64encode(f.read()).decode("utf-8"),  # rename key too
-}
+        "subject":     f"Scraper Results — {successful}/{total} states berhasil",
+        "message":     (
+            f"Scraping selesai.\n"
+            f"States berhasil : {successful}/{total}\n"
+            f"File terlampir  : requirements_all_states.xlsx"
+        ),
+        "filename":    "requirements_all_states.xlsx",
+        "file_base64": file_base64,
+    }
 
     try:
         data = json.dumps(payload).encode("utf-8")
@@ -413,12 +415,4 @@ if __name__ == "__main__":
 
     # ── Trigger n8n → send email ──────────────────────────────────────────
     xlsx_path = os.path.join(_COMBINED_DIR, "requirements_all_states.xlsx")
-trigger_n8n_webhook(xlsx_path, successful, total=8)
-
-
-
-
-
-
-
-
+    trigger_n8n_webhook(xlsx_path, successful, total=8)
