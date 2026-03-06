@@ -264,7 +264,7 @@ def export_combined(results, state_names):
 
 # Read from environment variable (set as GitHub Actions Secret: N8N_WEBHOOK_URL)
 # For local testing you can set it manually:  export N8N_WEBHOOK_URL="https://..."
-N8N_WEBHOOK_URL = os.environ.get("N8N_WEBHOOK_URL", "")
+N8N_WEBHOOK_URL = "https://snow213.app.n8n.cloud/webhook/trigger-github"
 
 def trigger_n8n_webhook(csv_path, successful, total):
     """
