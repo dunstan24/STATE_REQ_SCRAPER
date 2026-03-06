@@ -260,6 +260,69 @@ def export_combined(results, state_names):
     print(f"{'='*60}")
 
 
+# ── n8n Webhook trigger ───────────────────────────────────────────────────────
+
+# Read from environment variable (set as GitHub Actions Secret: N8N_WEBHOOK_URL)
+# For local testing you can set it manually:  export N8N_WEBHOOK_URL="https://..."
+N8N_WEBHOOK_URL = os.environ.get("N8N_WEBHOOK_URL", "")
+
+def trigger_n8n_webhook(csv_path, successful, total):
+    """
+    POST ke n8n webhook setelah scraping selesai.
+    CSV dikirim sebagai base64 di dalam payload JSON
+    agar n8n Cloud bisa langsung attach ke email tanpa akses disk.
+
+    Payload yang dikirim:
+      subject      : subject email
+      message      : body email
+      filename     : nama file attachment
+      csv_base64   : isi CSV di-encode base64
+    """
+    import urllib.request
+    import urllib.error
+    import json
+    import base64
+
+    if not N8N_WEBHOOK_URL:
+        logger.warning("[Webhook] N8N_WEBHOOK_URL belum diset — skip trigger.")
+        return
+
+    if not csv_path or not os.path.exists(csv_path):
+        logger.warning(f"[Webhook] CSV tidak ditemukan di: {csv_path} — skip trigger.")
+        return
+
+    # Read and encode CSV as base64
+    with open(csv_path, "rb") as f:
+        csv_base64 = base64.b64encode(f.read()).decode("utf-8")
+
+    payload = {
+        "subject":    f"Scraper Results — {successful}/{total} states berhasil",
+        "message":    (
+            f"Scraping selesai.\n"
+            f"States berhasil : {successful}/{total}\n"
+            f"File terlampir  : requirements_all_states.csv"
+        ),
+        "filename":   "requirements_all_states.csv",
+        "csv_base64": csv_base64,
+    }
+
+    try:
+        data = json.dumps(payload).encode("utf-8")
+        req  = urllib.request.Request(
+            N8N_WEBHOOK_URL,
+            data=data,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            logger.info(f"[Webhook] n8n triggered — status {resp.status}")
+            print(f"  [Webhook] Email dikirim via n8n ✓ (status {resp.status})")
+
+    except urllib.error.URLError as e:
+        logger.error(f"[Webhook] Gagal trigger n8n: {e}")
+        print(f"  [Webhook] GAGAL — pastikan N8N_WEBHOOK_URL sudah diisi dan workflow aktif.")
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
@@ -347,3 +410,7 @@ if __name__ == "__main__":
 
     print(f"\nSelesai! {successful}/8 states berhasil dalam {total_elapsed/60:.1f} menit.")
     print("Lihat main_scraper.log untuk detail lengkap.")
+
+    # ── Trigger n8n → send email ──────────────────────────────────────────
+    csv_path = os.path.join(_COMBINED_DIR, "requirements_all_states.csv")
+    trigger_n8n_webhook(csv_path, successful, total=8)
