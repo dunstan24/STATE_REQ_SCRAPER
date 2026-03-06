@@ -53,7 +53,7 @@ jobs:
         env:
           N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
         working-directory: src/scrapers
-        run: python main.py
+        run: python main_scraper.py
 
       # ── 7. Upload CSV as GitHub Actions artifact (30-day retention) ──────
       - name: Upload CSV artifact
